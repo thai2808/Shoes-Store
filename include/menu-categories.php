@@ -56,35 +56,46 @@ $sql_category = mysqli_query($con, 'SELECT * FROM brand');
    </div>
 </section>
 
-<!-- -->
+<!-- content -->
 <section class="km">
    <div class="container">
       <div class="row">
          <div class="col-lg-3 kmm">
             <div>
-            <img src="img/deliver.png" alt="" ></div>
+               <img src="img/deliver.png" alt="">
+            </div>
             <div class="content-text">
-               <h6>Vận chuyển miễn phí</h6>
-               <p>Hỗ trợ trực tiếp nhanh chóng</p>
+               <h6 style="font-weight: 600;">Vận chuyển miễn phí</h6>
+               <p>Cho đơn hàng > 500.000đ</p>
             </div>
          </div>
-         <div class="col-lg-3">
-            <div class="">
+         <div class="col-lg-3 kmm">
+            <div>
                <img src="img/gift.png" alt="" width="50">
-               <h5></h5>
+            </div>
+            <div class="content-text">
+               <h6 style="font-weight: 600;">Mua 2 được giảm giá</h6>
+               <p>Lên đến 10% cho đơn hàng kế tiếp</p>
             </div>
          </div>
-         <div class="col-lg-3">
+         <div class="col-lg-3 kmm">
             <div class="">
                <img src="img/award.png" alt="" width="50">
             </div>
+            <div class="content-text">
+               <h6 style="font-weight: 600;">Chứng nhận chất lượng</h6>
+               <p>Sản phẩm chất lượng kiểm định</p>
+            </div>
          </div>
-         <div class="col-lg-3">
+         <div class="col-lg-3 kmm">
             <div class="">
                <img src="img/hotline.png" alt="" width="50">
             </div>
+            <div class="content-text">
+               <h6 style="font-weight: 600;">Hotline: 19001234</h6>
+               <p>Hỗ trợ trực tiếp nhanh chóng</p>
+            </div>
          </div>
-
       </div>
    </div>
 </section>

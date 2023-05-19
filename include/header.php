@@ -33,7 +33,7 @@
          <div class="row">
             <div class="col-lg-3">
                <div class="header__logo">
-                  <a href="./index.html"><img src="img/logo-shoes.png" alt=""></a>
+                  <a href="./index.php"><img src="img/logo-shoes.png" alt=""></a>
                </div>
             </div>
             <div class="col-lg-6">
@@ -42,7 +42,7 @@
                      <?php
                         while($row_category = mysqli_fetch_array($sql_category)) {
                      ?>
-                     <li><a href="./shop-grid.html"><?php echo $row_category['CateName']?></a></li>
+                     <?php echo "<li><a href='shop-grid.php?CateID=".$row_category['CateID']."'>". $row_category['CateName']."</a></li>" ?>
                      <?php
                         }
                      ?>

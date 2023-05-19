@@ -30,10 +30,12 @@
 /* Template default CSS
 /*----------------------------------------*/
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
+
 html,
 body {
 	height: 100%;
-	font-family: "Arial", sans-serif;
+	font-family: "Roboto", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	font-smoothing: antialiased;
 }
@@ -77,7 +79,7 @@ h6 {
 p {
 	font-size: 13px;
 	font-family: "Cairo", sans-serif;
-	color: #6f6f6f;
+	/* color: #6f6f6f; */
 	font-weight: 400;
 	line-height: 26px;
 	margin: 0 0 15px 0;
@@ -89,7 +91,8 @@ p {
 .kmm
 {
    /* font-size: 14px; */
-   float: left;
+   /* float: left; */
+   display: inline-flex;
 }
 .content-text{
    margin-left: 10px ;

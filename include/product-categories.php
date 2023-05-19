@@ -1,28 +1,18 @@
    <?php
    $sql_product = mysqli_query($con, 'SELECT * FROM `product` WHERE ProNumber > 70 Limit 10');
    ?>
-
+<!-- Sản Phẩm Bán Chạy -->
    <!-- Featured Section Begin -->
    <section class="featured spad">
-      <div class="container">
+      <div class="container text-center">
          <div class="row">
             <div class="col-lg-12">
                <div class="section-title">
                   <h4>Sản Phẩm Bán Chạy</h4>
                </div>
-               <!-- <div class="featured__controls">
-                  <ul>
-                     <li class="activew"> <a href=""> All</a></li>
-                     <li data-filter=".nam">Giày Nam</li>
-                     <li data-filter=".nu">Giày Nữ</li>
-                     <li data-filter=".dep">Dép</li>
-                     <li data-filter=".sale">Sale</li>
-
-                  </ul>
-               </div> -->
             </div>
          </div>
-         <div class="row featured__filter" align=center>
+         <div class="row featured__filter">
             <?php
             while ($row_product = mysqli_fetch_array($sql_product)) {
             ?>
@@ -50,49 +40,19 @@
       <div class="col-lg col-md col-sm">
          <a href="#"><button class="btn btn-primary more" type="submit">Xem Thêm Sản Phẩm</button></a>
       </div>
-      </div>
-      </div>
    </section>
-   <!-- Featured Section End -->
-   <!-- Banner Begin -->
-   <!-- <div class="banner">
-      <div class="container">
-         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6">
-               <div class="banner__pic">
-                  <img src="img/banner/banner-shoe-1.jpg" alt="">
-               </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-               <div class="banner__pic">
-                  <img src="img/banner/banner-shoe-2.jpg" alt="">
-               </div>
-            </div>
-         </div>
-      </div>
-   </div> -->
-   <!-- Banner End -->
-
+<!-- Featured Section End -->
+   <!-- Sản Phẩm Mới Nhất -->
    <section class="featured spad">
-      <div class="container">
+      <div class="container text-center">
          <div class="row">
             <div class="col-lg-12">
                <div class="section-title">
                   <h4>Sản Phẩm Mới Nhất</h4>
                </div>
-               <!-- <div class="featured__controls">
-                  <ul>
-                     <li class="activew"> <a href=""> All</a></li>
-                     <li data-filter=".nam">Giày Nam</li>
-                     <li data-filter=".nu">Giày Nữ</li>
-                     <li data-filter=".dep">Dép</li>
-                     <li data-filter=".sale">Sale</li>
-
-                  </ul>
-               </div> -->
             </div>
          </div>
-         <div class="row featured__filter" align=center>
+         <div class="row featured__filter">
             <?php
             $sql_product1 = mysqli_query($con, 'SELECT * FROM `product` ORDER BY ProDate DESC Limit 10');
             while ($row_product1 = mysqli_fetch_array($sql_product1)) {
@@ -122,10 +82,8 @@
       <div class="col-lg col-md col-sm">
          <a href="#"><button class="btn btn-primary more" type="submit">Xem Thêm Sản Phẩm</button></a>
       </div>
-      </div>
-      </div>
    </section>
-
+   <!-- Banner Begin -->
    <div class="banner">
       <div class="container">
          <div class="row">
@@ -142,3 +100,4 @@
          </div>
       </div>
    </div>
+   <!-- Banner End -->
