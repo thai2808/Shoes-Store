@@ -14,8 +14,8 @@ $sql_category = mysqli_query($con, 'SELECT * FROM brand');
                   <?php
                   while ($row_category = mysqli_fetch_array($sql_category)) {
                   ?>
-                     <li><a href="#">Giày <?php echo $row_category['BraName'] ?></a></li>
-                  <?php
+                  <?php echo "<li><a href='shop-grid.php?BraID=".$row_category['BraID']."'>". $row_category['BraName']."</a></li>" ?>
+                     <?php
                   }
                   ?>
                </ul>
@@ -25,10 +25,6 @@ $sql_category = mysqli_query($con, 'SELECT * FROM brand');
             <div class="hero__search">
                <div class="hero__search__form">
                   <form action="#">
-                     <div class="hero__search__categories">
-                        All Categories
-                        <span class="arrow_carrot-down"></span>
-                     </div>
                      <input type="text" placeholder="What do yo u need?">
                      <button type="submit" class="site-btn">SEARCH</button>
                   </form>
