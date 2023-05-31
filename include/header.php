@@ -42,7 +42,7 @@
                      <?php
                         while($row_category = mysqli_fetch_array($sql_category)) {
                      ?>
-                     <?php echo "<li><a href='shop-grid.php?CateID=".$row_category['CateID']."'>". $row_category['CateName']."</a></li>" ?>
+                     <?php echo "<li class ='cate".$row_category['CateID']."'><a href='shop-grid.php?CateID=".$row_category['CateID']."'>". $row_category['CateName']."</a></li>" ?>
                      <?php
                         }
                      ?>

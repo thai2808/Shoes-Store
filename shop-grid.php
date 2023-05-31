@@ -41,7 +41,7 @@ include_once('connect.php');
                <div class="hero__categories">
                   <div class="hero__categories__all">
                      <i class="fa fa-bars"></i>
-                     <span>All departments</span>
+                     <span>Danh Mục</span>
                   </div>
                   <ul>
                      <?php                                              
@@ -77,6 +77,7 @@ include_once('connect.php');
          </div>
       </div>
    </section>
+
    <!-- Hero Section End -->
 
    <!-- Breadcrumb Section Begin -->
@@ -88,7 +89,25 @@ include_once('connect.php');
                   <h2>Shoes Shop</h2>
                   <div class="breadcrumb__option">
                      <a href="./index.php">Home</a>
-                     <span>Shop</span>
+                     <span>Shop/</span>
+                     <?php
+                        if (isset($_GET['CateID'])) {
+                           $cid = $_GET['CateID'];
+                           $sql = "Select * from categories where CateID = '$cid'";
+                           $result = $con->query($sql) or die($con->error);
+                           while( $row = $result->fetch_assoc()){
+                              echo "<span>".$row['CateName']."</span>";
+                           }
+                        }
+                        elseif(isset($_GET['BraID'])){
+                           $bid = $_GET['BraID'];
+                           $sql = "Select * from brand where BraID = '$bid'";
+                           $result = $con->query($sql) or die($con->error);
+                           while( $row = $result->fetch_assoc()){
+                              echo "<span>".$row['BraName']."</span>";
+                           }
+                        }
+                     ?> 
                   </div>
                </div>
             </div>
@@ -104,7 +123,7 @@ include_once('connect.php');
             <div class="col-lg-3 col-md-5">
                <div class="sidebar">
                   <div class="sidebar__item">
-                     <h4>Department</h4>
+                     <h4>Thương Hiệu</h4>
                      <ul>
                         <?php
                         if (isset($_GET['CateID'])) {
@@ -113,7 +132,8 @@ include_once('connect.php');
                            $result = $con->query($sql2) or die($con->error);
                            while ($row = $result->fetch_assoc()) {
                         ?>
-                              <?php echo "<li><a href='shop-grid.php?CateID=" . $cid . "&BraID=" . $row['BraID'] . "'>" . $row['BraName'] . "</a></li>" ?>
+                              <?php 
+                              echo "<li><input type='checkbox' name='fruit' value='fruit'> <a href='shop-grid.php?CateID=" . $cid . "&BraID=" . $row['BraID'] . "'>". $row['BraName'] . "</a></li>" ?>
                         <?php
                            }
                         }
@@ -123,7 +143,7 @@ include_once('connect.php');
                   <div class="sidebar__item">
                      <h4>Price</h4>
                      <div class="price-range-wrap">
-                        <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-min="10" data-max="540">
+                        <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-min="500000" data-max="6000000">
                            <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
@@ -134,45 +154,6 @@ include_once('connect.php');
                               <input type="text" id="maxamount">
                            </div>
                         </div>
-                     </div>
-                  </div>
-                  <div class="sidebar__item sidebar__item__color--option">
-                     <h4>Colors</h4>
-                     <div class="sidebar__item__color sidebar__item__color--white">
-                        <label for="white">
-                           White
-                           <input type="radio" id="white">
-                        </label>
-                     </div>
-                     <div class="sidebar__item__color sidebar__item__color--gray">
-                        <label for="gray">
-                           Gray
-                           <input type="radio" id="gray">
-                        </label>
-                     </div>
-                     <div class="sidebar__item__color sidebar__item__color--red">
-                        <label for="red">
-                           Red
-                           <input type="radio" id="red">
-                        </label>
-                     </div>
-                     <div class="sidebar__item__color sidebar__item__color--black">
-                        <label for="black">
-                           Black
-                           <input type="radio" id="black">
-                        </label>
-                     </div>
-                     <div class="sidebar__item__color sidebar__item__color--blue">
-                        <label for="blue">
-                           Blue
-                           <input type="radio" id="blue">
-                        </label>
-                     </div>
-                     <div class="sidebar__item__color sidebar__item__color--green">
-                        <label for="green">
-                           Green
-                           <input type="radio" id="green">
-                        </label>
                      </div>
                   </div>
                   <div class="sidebar__item">
@@ -354,13 +335,13 @@ include_once('connect.php');
                </div>
             </div>
          </div> -->
-
+         <div>
                <div class="row featured__filter">
                   <?php
                   if (isset($_GET['CateID']) && isset($_GET['BraID'])) {
                      $cid1 = $_GET['CateID'];
                      $bid1 = $_GET['BraID'];
-                     $sql = "Select * from product WHERE product.CateID ='$cid1' and product.BraID='$bid1'";
+                     $sql = "Select * from product WHERE product.CateID ='$cid1' and product.BraID='$bid1' Limit 8";
                      $result = $con->query($sql) or die($con->error);
                      // var_dump($result);
                      while ($row = $result->fetch_assoc()) {
@@ -379,7 +360,7 @@ include_once('connect.php');
                            </div>
                            <div class="featured__item__text">
                               <h6><a href="#"><?php echo $row['ProName'] ?></a></h6>
-                              <h5><?php echo number_format($row['ProPrice']) ?>,000₫</h5>
+                              <h5><?php echo number_format($row['ProPrice']) ?>₫</h5>
                            </div>
                         </div>
                </div>
@@ -406,7 +387,7 @@ include_once('connect.php');
                   </div>
                   <div class="featured__item__text">
                      <h6><a href="#"><?php echo $row['ProName'] ?></a></h6>
-                     <h5><?php echo number_format($row['ProPrice']) ?>,000₫</h5>
+                     <h5><?php echo number_format($row['ProPrice']) ?>₫</h5>
                   </div>
                </div>
             </div>
@@ -434,7 +415,7 @@ include_once('connect.php');
                   </div>
                   <div class="featured__item__text">
                      <h6><a href="#"><?php echo $row['ProName'] ?></a></h6>
-                     <h5><?php echo number_format($row['ProPrice']) ?>,000₫</h5>
+                     <h5><?php echo number_format($row['ProPrice']) ?>₫</h5>
                   </div>
                </div>
          </div>
@@ -443,6 +424,7 @@ include_once('connect.php');
                      }
                   }
             ?>
+         </div>
 <div class="product__pagination">
    <a href="#">1</a>
    <a href="#">2</a>

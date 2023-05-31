@@ -16,7 +16,7 @@
             <?php
             while ($row_product = mysqli_fetch_array($sql_product)) {
             ?>
-               <div class="col-lg-3 col-md-4 col-sm-6 mix product-box">
+               <div class="col-lg-3 col-md-4 col-sm-6 product-box">
                   <div class="featured__item">
                      <a href="#">
                         <div class="featured__item__pic">
@@ -30,7 +30,7 @@
                   </div>
                   <div class="featured__item__text">
                      <h6><a href="#"><?php echo $row_product['ProName'] ?></a></h6>
-                     <h5><?php echo number_format($row_product['ProPrice']) ?>,000₫</h5>
+                     <h5><?php echo number_format($row_product['ProPrice']) ?>₫</h5>
                   </div>
                </div>
          </div>
@@ -72,7 +72,7 @@
 
                   <div class="featured__item__text">
                      <h6><a href="#"><?php echo $row_product1['ProName'] ?></a></h6>
-                     <h5><?php echo number_format($row_product1['ProPrice']) ?>,000₫</h5>
+                     <h5><?php echo number_format($row_product1['ProPrice']) ?>₫</h5>
                   </div>
                </div>
          </div>

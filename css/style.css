@@ -49,7 +49,7 @@ h6 {
 	margin: 0;
 	color: #111111;
 	font-weight: 400;
-	font-family: "Cairo", sans-serif;
+	/* font-family: "Cairo", sans-serif; */
 }
 
 h1 {
@@ -78,7 +78,7 @@ h6 {
 
 p {
 	font-size: 13px;
-	font-family: "Cairo", sans-serif;
+	/* font-family: "Cairo", sans-serif; */
 	/* color: #6f6f6f; */
 	font-weight: 400;
 	line-height: 26px;
@@ -87,6 +87,17 @@ p {
 .product-box
 {
    flex-basis: 20%;
+}
+@media screen and (max-width: 767px){
+   .km{
+      display: none;
+   }
+   .product-box{
+      flex-basis: 25%;
+   }
+   .product-box .featured__item__text h6 {
+      height: 50px;
+   }
 }
 .kmm
 {
@@ -450,7 +461,9 @@ ol {
 	margin-right: 50px;
 	position: relative;
 }
-
+/* .header__menu ul li.cate1 a{
+   color: #cc9966;
+} */
 .header__menu ul li .header__menu__dropdown {
 	position: absolute;
 	left: 0;
@@ -879,7 +892,7 @@ ol {
    /* cursor: pointer; */
    border: 1px solid #e1e1e1;
    box-sizing: border-box;
-   
+   height: 295px;
 }
 
 .featured__item:hover .featured__item__pic .featured__item__pic__hover {
@@ -964,10 +977,12 @@ ol {
 
 .featured__item__text h6 {
 	margin-bottom: 20px;
+   height: 34px;
 }
 
 .featured__item__text h6 a {
 	color: #252525;
+   
 }
 
 .featured__item__text h5 {
@@ -975,7 +990,7 @@ ol {
    font-size: 14px;
 	font-weight: 600;
    color:#cc9966;
-   margin-bottom: 20px;
+   /* margin-bottom: 20px; */
 }
 
 /*---------------------
@@ -1136,7 +1151,7 @@ ol {
 	font-size: 16px;
 	color: #1c1c1c;
 	line-height: 39px;
-	display: block;
+	/* display: block; */
 }
 
 .sidebar__item .latest-product__text {
@@ -1157,11 +1172,12 @@ ol {
 
 .price-range-wrap .range-slider .price-input {
 	position: relative;
+   display: flex;
 }
 
 .price-range-wrap .range-slider .price-input:after {
 	position: absolute;
-	left: 38px;
+	left: 130px;
 	top: 13px;
 	height: 1px;
 	width: 5px;
@@ -1173,9 +1189,9 @@ ol {
 	font-size: 16px;
 	color: #dd2222;
 	font-weight: 700;
-	max-width: 20%;
+	max-width: 100%;
 	border: none;
-	display: inline-block;
+	/* display: flex; */
 }
 
 .price-range-wrap .price-range {
@@ -1657,6 +1673,8 @@ ol {
 .product__pagination,
 .blog__pagination {
 	padding-top: 10px;
+   align-items: center;
+   padding-left: 280px;
 }
 
 .product__pagination a,
