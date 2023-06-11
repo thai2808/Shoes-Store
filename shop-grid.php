@@ -44,14 +44,14 @@ include_once('connect.php');
                      <span>Danh Mục</span>
                   </div>
                   <ul>
-                     <?php                                              
-                        $sql = "SELECT * FROM brand";
-                        $result = $con->query($sql) or die($con->error);
-                        while ($row = $result->fetch_assoc()) {
-                           ?>
-                                 <?php echo "<li><a href='shop-grid.php?BraID=" .$row['BraID']. "'>" . $row['BraName'] . "</a></li>" ;
-                              }
-                           ?>
+                     <?php
+                     $sql = "SELECT * FROM brand";
+                     $result = $con->query($sql) or die($con->error);
+                     while ($row = $result->fetch_assoc()) {
+                     ?>
+                     <?php echo "<li><a href='shop-grid.php?BraID=" . $row['BraID'] . "'>" . $row['BraName'] . "</a></li>";
+                     }
+                     ?>
                   </ul>
                </div>
             </div>
@@ -91,23 +91,30 @@ include_once('connect.php');
                      <a href="./index.php">Home</a>
                      <span>Shop/</span>
                      <?php
-                        if (isset($_GET['CateID'])) {
-                           $cid = $_GET['CateID'];
-                           $sql = "Select * from categories where CateID = '$cid'";
-                           $result = $con->query($sql) or die($con->error);
-                           while( $row = $result->fetch_assoc()){
-                              echo "<span>".$row['CateName']."</span>";
-                           }
+                     if (isset($_GET['CateID'])) {
+                        $cid = $_GET['CateID'];
+                        $sql = "Select * from categories where CateID = '$cid'";
+                        $result = $con->query($sql) or die($con->error);
+                        while ($row = $result->fetch_assoc()) {
+                           echo "<span>" . $row['CateName'] . "/</span>";
                         }
-                        elseif(isset($_GET['BraID'])){
+                        if (isset($_GET['BraID'])) {
                            $bid = $_GET['BraID'];
                            $sql = "Select * from brand where BraID = '$bid'";
                            $result = $con->query($sql) or die($con->error);
-                           while( $row = $result->fetch_assoc()){
-                              echo "<span>".$row['BraName']."</span>";
+                           while ($row = $result->fetch_assoc()) {
+                              echo "<span>" . $row['BraName'] . "</span>";
                            }
                         }
-                     ?> 
+                     } elseif (isset($_GET['BraID'])) {
+                        $bid = $_GET['BraID'];
+                        $sql = "Select * from brand where BraID = '$bid'";
+                        $result = $con->query($sql) or die($con->error);
+                        while ($row = $result->fetch_assoc()) {
+                           echo "<span>" . $row['BraName'] . "</span>";
+                        }
+                     }
+                     ?>
                   </div>
                </div>
             </div>
@@ -132,8 +139,8 @@ include_once('connect.php');
                            $result = $con->query($sql2) or die($con->error);
                            while ($row = $result->fetch_assoc()) {
                         ?>
-                              <?php 
-                              echo "<li><input type='checkbox' name='fruit' value='fruit'> <a href='shop-grid.php?CateID=" . $cid . "&BraID=" . $row['BraID'] . "'>". $row['BraName'] . "</a></li>" ?>
+                              <?php
+                              echo "<li><input type='checkbox' name='fruit' value='fruit'> <a href='shop-grid.php?CateID=" . $cid . "&BraID=" . $row['BraID'] . "'>" . $row['BraName'] . "</a></li>" ?>
                         <?php
                            }
                         }
@@ -156,7 +163,7 @@ include_once('connect.php');
                         </div>
                      </div>
                   </div>
-                  <div class="sidebar__item">
+                  <!-- <div class="sidebar__item">
                      <h4>Popular Size</h4>
                      <div class="sidebar__item__size">
                         <label for="large">
@@ -182,7 +189,7 @@ include_once('connect.php');
                            <input type="radio" id="tiny">
                         </label>
                      </div>
-                  </div>
+                  </div> -->
 
                </div>
             </div>
@@ -317,7 +324,7 @@ include_once('connect.php');
                      </div>
                      <div class="col-lg-4 col-md-4">
                         <div class="filter__found">
-                           <h6><span>16</span> Products found</h6>
+                           <!-- <h6><span>16</span> Products found</h6> -->
                         </div>
                      </div>
                      <div class="col-lg-4 col-md-3">
@@ -335,108 +342,114 @@ include_once('connect.php');
                </div>
             </div>
          </div> -->
-         <div>
-               <div class="row featured__filter">
-                  <?php
-                  if (isset($_GET['CateID']) && isset($_GET['BraID'])) {
-                     $cid1 = $_GET['CateID'];
-                     $bid1 = $_GET['BraID'];
-                     $sql = "Select * from product WHERE product.CateID ='$cid1' and product.BraID='$bid1' Limit 8";
-                     $result = $con->query($sql) or die($con->error);
-                     // var_dump($result);
-                     while ($row = $result->fetch_assoc()) {
-                  ?>
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                           <div class="featured__item">
-                              <a href="#">
-                                 <div class="featured__item__pic">
-                                    <img src="img/all/<?php echo $row['ProPicture'] ?>" alt="">
-                              </a>
-                              <ul class="featured__item__pic__hover">
-                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                              </ul>
-                           </div>
-                           <div class="featured__item__text">
-                              <h6><a href="#"><?php echo $row['ProName'] ?></a></h6>
-                              <h5><?php echo number_format($row['ProPrice']) ?>₫</h5>
-                           </div>
-                        </div>
-               </div>
-            <?php
-                     }
-                  } elseif (isset($_GET['CateID'])) {
-                     $cid = $_GET['CateID'];
-                     $sql = "SELECT * FROM `product` WHERE CateID = " . $cid . " Limit 8";
-                     $result = $con->query($sql) or die($con->error);
-                     // var_dump($result);
-                     while ($row = $result->fetch_assoc()) {
-            ?>
-               <div class="col-lg-3 col-md-4 col-sm-6">
-                  <div class="featured__item">
-                     <a href="#">
-                        <div class="featured__item__pic">
-                           <img src="img/all/<?php echo $row['ProPicture'] ?>" alt="">
-                     </a>
-                     <ul class="featured__item__pic__hover">
-                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                     </ul>
-                  </div>
-                  <div class="featured__item__text">
-                     <h6><a href="#"><?php echo $row['ProName'] ?></a></h6>
-                     <h5><?php echo number_format($row['ProPrice']) ?>₫</h5>
-                  </div>
-               </div>
-            </div>
-            <?php    
-                     }  
-                  } else {
-                     if (isset($_GET['BraID'])) {
-                        $bid = $_GET['BraID'];
-                        $sql = "SELECT * FROM `product` WHERE BraID = " . $bid . " Limit 8";
+               <div>
+                  <div class="row featured__filter">
+                     <?php
+                     if (isset($_GET['CateID']) && isset($_GET['BraID'])) {
+                        $cid1 = $_GET['CateID'];
+                        $bid1 = $_GET['BraID'];
+                        $sql = "Select * from product WHERE product.CateID ='$cid1' and product.BraID='$bid1' Limit 8";
                         $result = $con->query($sql) or die($con->error);
                         // var_dump($result);
                         while ($row = $result->fetch_assoc()) {
-            ?>
-               <div class="col-lg-3 col-md-4 col-sm-6">
-                  <div class="featured__item">
-                     <a href="#">
-                        <div class="featured__item__pic">
-                           <img src="img/all/<?php echo $row['ProPicture'] ?>" alt="">
-                     </a>
-                     <ul class="featured__item__pic__hover">
-                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                     </ul>
+                     ?>
+                           <div class="col-lg-3 col-md-4 col-sm-6">
+                              <div class="featured__item">
+                                 <a href='shop-details.php?ProID=<?php echo $row['ProID']; ?> '>
+                                    <div class="featured__item__pic">
+                                       <div class="container-zoom">
+                                          <img src="img/all/<?php echo $row['ProPicture'] ?>" alt="" class="zoom-img">
+                                       </div>
+                                 </a>
+                                 <!-- <ul class="featured__item__pic__hover">
+                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                 </ul> -->
+                              </div>
+                              <div class="featured__item__text">
+                                 <h6><a href="#"><?php echo $row['ProName'] ?></a></h6>
+                                 <h5><?php echo number_format($row['ProPrice']) ?>₫</h5>
+                              </div>
+                           </div>
                   </div>
-                  <div class="featured__item__text">
-                     <h6><a href="#"><?php echo $row['ProName'] ?></a></h6>
-                     <h5><?php echo number_format($row['ProPrice']) ?>₫</h5>
+               <?php
+                        }
+                     } elseif (isset($_GET['CateID'])) {
+                        $cid = $_GET['CateID'];
+                        $sql = "SELECT * FROM `product` WHERE CateID = " . $cid . " Limit 8";
+                        $result = $con->query($sql) or die($con->error);
+                        // var_dump($result);
+                        while ($row = $result->fetch_assoc()) {
+               ?>
+                  <div class="col-lg-3 col-md-4 col-sm-6">
+                     <div class="featured__item">
+                        <a href='shop-details.php?ProID=<?php echo $row['ProID']; ?> '>
+                           <div class="featured__item__pic">
+                              <div class="container-zoom">
+                                 <img src="img/all/<?php echo $row['ProPicture'] ?>" alt="" class="zoom-img">
+                              </div>
+                        </a>
+                        <!-- <ul class="featured__item__pic__hover">
+                           <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                           <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                           <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul> -->
+                     </div>
+                     <div class="featured__item__text">
+                        <h6><a href="#"><?php echo $row['ProName'] ?></a></h6>
+                        <h5><?php echo number_format($row['ProPrice']) ?>₫</h5>
+                     </div>
                   </div>
                </div>
-         </div>
-            <?php
+               <?php
+                        }
+                     } else {
+                        if (isset($_GET['BraID'])) {
+                           $bid = $_GET['BraID'];
+                           $sql = "SELECT * FROM `product` WHERE BraID = " . $bid . " Limit 8";
+                           $result = $con->query($sql) or die($con->error);
+                           // var_dump($result);
+                           while ($row = $result->fetch_assoc()) {
+               ?>
+                  <div class="col-lg-3 col-md-6 col-sm-6">
+                     <div class="featured__item">
+                        <a href='shop-details.php?ProID=<?php echo $row['ProID']; ?> '>
+                           <div class="featured__item__pic">
+                              <div class="container-zoom">
+                                 <img src="img/all/<?php echo $row['ProPicture'] ?>" alt="" class="zoom-img">
+                              </div>
+                        </a>
+                        <!-- <ul class="featured__item__pic__hover">
+                           <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                           <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                           <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul> -->
+                     </div>
+                     <div class="featured__item__text">
+                        <h6><a href="#"><?php echo $row['ProName'] ?></a></h6>
+                        <h5><?php echo number_format($row['ProPrice']) ?>₫</h5>
+                     </div>
+                  </div>
+            </div>
+   <?php
+                           }
                         }
                      }
-                  }
-            ?>
+   ?>
          </div>
-<div class="product__pagination">
-   <a href="#">1</a>
-   <a href="#">2</a>
-   <a href="#">3</a>
-   <a href="#"><i class="fa fa-long-arrow-right"></i></a>
-</div>
+         <div class="product__pagination">
+            <a href="#">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+         </div>
    </section>
    <!-- Product Section End -->
 
    <!-- Footer Section Begin -->
    <?php
-      include("include/footer.php");
+   include("include/footer.php");
    ?>
    <!-- Footer Section End -->
 

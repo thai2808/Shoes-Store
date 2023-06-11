@@ -1,13 +1,14 @@
-<?php
-$con = mysqli_connect("localhost","root","","shoes_store");
+<?php 
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "shoes_store";
 
+// Create connection
+$con = new mysqli($servername, $username, $password, $dbname);
 // Check connection
-if (mysqli_connect_errno())
-  {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  }
-	  // Change character set to utf8
-	mysqli_set_charset($con,"utf8");
-
-	
+if ($con->connect_error) {
+  die("Connection failed: " . $con->connect_error);
+}
+//echo "Connected successfully";
 ?>

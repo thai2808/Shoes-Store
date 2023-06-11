@@ -67,7 +67,7 @@ $sql_category = mysqli_query($con, 'SELECT * FROM brand');
          </div>
          <div class="col-lg-3 kmm">
             <div>
-               <img src="img/gift.png" alt="" width="50">
+               <img src="img/gift-box.png" alt="" width="50">
             </div>
             <div class="content-text">
                <h6 style="font-weight: 600;">Mua 2 được giảm giá</h6>

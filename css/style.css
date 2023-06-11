@@ -84,21 +84,61 @@ p {
 	line-height: 26px;
 	margin: 0 0 15px 0;
 }
-.product-box
+/* .text-danger s
+{
+   font-size: 10px;
+
+} */
+/* .product-box
 {
    flex-basis: 20%;
-}
-@media screen and (max-width: 767px){
-   .km{
+} */
+@media screen and (min-width: 992px){
+   /* .km{
       display: none;
-   }
+   } */
    .product-box{
-      flex-basis: 25%;
+      flex-basis: 20%;
    }
-   .product-box .featured__item__text h6 {
+   /* .product-box .featured__item__text h6 {
       height: 50px;
-   }
+   } */
 }
+/*Login-Form-Begin*/
+.modal-title {
+   
+   color: #cc9966;
+}
+.modal-content {
+   border: 1px solid #cc9966;
+   /* text-align: center; */
+   /* align-items: center; */
+}
+.modal-header{
+   align-items: center;
+   /* text-align: center; */
+}
+
+label.col-form-label {
+   letter-spacing: 1px;
+   font-size: 15px;
+   color: #000;
+}
+
+.btn-signin {
+   color: white;
+   background-color: #cc9966;
+   border-color: #cc9966;
+   transition: 0.5s all;
+}
+
+.btn-signin:hover {
+   background-color: #d6ab80;
+   border-color: #cc9966;
+   transition: 0.5s all;
+   color: white;
+}
+/*Login-Form-End*/
 .kmm
 {
    /* font-size: 14px; */
@@ -434,7 +474,7 @@ ol {
 }
 
 .header__top__right__auth a {
-	display: block;
+	/* display: block; */
 	font-size: 14px;
 	color: #1c1c1c;
 }
@@ -892,7 +932,7 @@ ol {
    /* cursor: pointer; */
    border: 1px solid #e1e1e1;
    box-sizing: border-box;
-   height: 295px;
+   /* height: 295px; */
 }
 
 .featured__item:hover .featured__item__pic .featured__item__pic__hover {
@@ -906,9 +946,21 @@ ol {
 	overflow: hidden;
 	background-position: center center;
    background-color: #cbcbcb;
-   /* cursor: pointer; */
+   
 }
-
+.featured__item__pic .container-zoom{
+   position: relative;
+	/* display: inline-block; */
+   overflow: hidden;
+}
+.featured__item__pic .container-zoom .zoom-img{
+   
+   transition: transform 0.5s ease;
+}
+.featured__item__pic .container-zoom:hover .zoom-img{
+   transform: scale(1.2);
+   transform-origin: center center;
+}
 .featured__item__pic__hover {
 	position: absolute;
 	left: 0;
@@ -990,7 +1042,13 @@ ol {
    font-size: 14px;
 	font-weight: 600;
    color:#cc9966;
-   /* margin-bottom: 20px; */
+   margin-bottom: 20px;
+}
+.featured__item__text h5 span.text1 s{
+   font-size: 12px;
+	/* font-weight: 600; */
+   color:#999999;
+ 
 }
 
 /*---------------------
