@@ -24,9 +24,9 @@ $sql_category = mysqli_query($con, 'SELECT * FROM brand');
          <div class="col-lg-9">
             <div class="hero__search">
                <div class="hero__search__form">
-                  <form action="#">
-                     <input type="text" placeholder="What do yo u need?">
-                     <button type="submit" class="site-btn">SEARCH</button>
+                  <form method="GET" action="" >
+                     <input type="text" placeholder="What do you need?" name="search-product">
+                     <button type="submit" class="site-btn" name ="search-btn">SEARCH</button>
                   </form>
                </div>
                <div class="hero__search__phone">
@@ -40,6 +40,7 @@ $sql_category = mysqli_query($con, 'SELECT * FROM brand');
                </div>
             </div>
             <div class="hero__item set-bg" data-setbg="img/hero/banner-shoes.jpg">
+               <!-- <img src="../img/hero/banner-shoes.jpg" alt=""> -->
                <div class="hero__text">
                   <span>Buy Online</span>
                   <h2>The Best <br />Sale</h2>

@@ -1,6 +1,6 @@
 <?php
-	session_start();
-	include_once('connect.php');
+session_start();
+include_once('connect.php');
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -13,7 +13,7 @@
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
    <title>Shoes Store</title>
    <!-- Google Font -->
-   <link href="https://fonts.googleapis.com/css2?family=Arial:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+   <!-- <link href="https://fonts.googleapis.com/css2?family=Arial:wght@200;300;400;600;900&display=swap" rel="stylesheet"> -->
    <!-- Css Styles -->
    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
@@ -24,26 +24,36 @@
    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
    <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
+
 <body>
-<!-- Header Section Begin -->
+   <!-- Header Section Begin -->
    <?php
-	include('include/header.php'); 
+   include('include/header.php');
    ?>
-<!-- Header Section End -->
+   <!-- Header Section End -->
 
-<!-- Categories Section Begin -->
+   <!-- Categories Section Begin -->
    <?php
-	include('include/menu-categories.php'); 
+   include('include/menu-categories.php');
    ?>
-<!-- Categories Section End -->
-
-<!-- Product Section Begin -->
+   <!-- Categories Section End -->
    <?php
-	include('include/product-categories.php'); 
-   ?>
-<!-- Product Section End -->
 
-<!-- Blog Section Begin -->
+         include('include/search-product.php');
+      
+   // 
+   ?>
+   <!-- Product Section Begin -->
+   <?php
+   include('include/product-categories.php');
+   ?>
+   <!-- Product Section End -->
+
+   <div class="col-lg col-md col-sm">
+      <!-- <a href="#"><button class="btn btn-primary more" type="submit">Xem Thêm Sản Phẩm</button></a> -->
+   </div>
+   </section>
+   <!-- Blog Section Begin -->
    <section class="from-blog spad">
       <div class="container">
          <div class="row">
@@ -102,35 +112,35 @@
          </div>
       </div>
    </section>
-<!-- Blog Section End -->
+   <!-- Blog Section End -->
 
-<!-- Band Section Begin -->
-<section class="categories">
-   <div class="container">
-      <div class="row">
-         <div class="categories__slider owl-carousel">
-            <?php
-            $sql_category1 = mysqli_query($con, 'SELECT * FROM brand');
-            while ($row_category1 = mysqli_fetch_array($sql_category1)) {
-            ?>
-               <div class="col-lg-3">
-                  <div class="categories__item set-bg" data-setbg="img/categories/<?php echo $row_category1['BraImage'] ?>">
-                     <h5><a href="#"><?php echo $row_category1['BraName'] ?></a></h5>
+   <!-- Band Section Begin -->
+   <section class="categories">
+      <div class="container">
+         <div class="row">
+            <div class="categories__slider owl-carousel">
+               <?php
+               $sql_category1 = mysqli_query($con, 'SELECT * FROM brand');
+               while ($row_category1 = mysqli_fetch_array($sql_category1)) {
+               ?>
+                  <div class="col-lg-3">
+                     <div class="categories__item set-bg" data-setbg="img/categories/<?php echo $row_category1['BraImage'] ?>">
+                        <h5><a href="#"><?php echo $row_category1['BraName'] ?></a></h5>
+                     </div>
                   </div>
-               </div>
-            <?php
-            }
-            ?>
+               <?php
+               }
+               ?>
+            </div>
          </div>
       </div>
-   </div>
-</section>
-<!-- Band Section End -->
-<!-- Footer Section Begin -->
+   </section>
+   <!-- Band Section End -->
+   <!-- Footer Section Begin -->
    <?php
    include('include/footer.php');
    ?>
-<!-- Footer Section End -->
+   <!-- Footer Section End -->
 
    <!-- Js Plugins -->
    <script src="js/jquery-3.3.1.min.js"></script>

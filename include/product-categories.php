@@ -18,38 +18,35 @@
             ?>
                <div class="col-lg-3 col-md-4 col-sm-4 product-box">
                   <div class="featured__item">
-
-                     <a href='shop-details.php?ProID=<?php echo $row_product['ProID']; ?> '>
-                        <div class="featured__item__pic">
+                     <div class="featured__item__pic">
+                        <a href='shop-details.php?ProID=<?php echo $row_product['ProID']; ?> '>
                            <div class="container-zoom">
                               <img src="img/all/<?php echo $row_product['ProPicture'] ?>" alt="" class="zoom-img">
                            </div>
-                           <h5><span class="badge bg-light text-danger">-<?php echo round((($row_product['ProBasisPrice']-$row_product['ProPrice'])/$row_product['ProBasisPrice'])*100) ?>%</span></h5>
-
-                     </a>
-
-                     <!-- <ul class="featured__item__pic__hover">
-                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                     </ul> -->
-                  </div>
-                  <div class="featured__item__text">
-                     <h6><a href="#"><?php echo $row_product['ProName'] ?></a></h6>
-                     <h5><?php echo number_format($row_product['ProPrice']) ?>₫
-                        <span class="text1"><s><?php echo number_format($row_product['ProBasisPrice']) ?>₫</s></span>
-                     </h5>
-
+                           <span class="badge bg-danger dis">-<?php echo round((($row_product['ProBasisPrice'] - $row_product['ProPrice']) / $row_product['ProBasisPrice']) * 100) ?>%</span>
+                           <?php
+                           if ($row_product['ProHot'] > 0) {
+                           ?>
+                              <span class="badge bg-warning hot">Hot</span>
+                           <?php
+                           }
+                           ?>
+                        </a>
+                     </div>
+                     <div class="featured__item__text">
+                        <h6><a href="#"><?php echo $row_product['ProName'] ?></a></h6>
+                        <h5><?php echo number_format($row_product['ProPrice']) ?>₫
+                           <span class="text1"><s><?php echo number_format($row_product['ProBasisPrice']) ?>₫</s></span>
+                        </h5>
+                     </div>
                   </div>
                </div>
-
-         </div>
-      <?php
+            <?php
             }
-      ?>
-      <div class="col-lg col-md col-sm">
-         <!-- <a href="#"><button class="btn btn-primary more" type="submit">Xem Thêm Sản Phẩm</button></a> -->
-      </div>
+            ?>
+            <div class="col-lg col-md col-sm">
+               <!-- <a href="#"><button class="btn btn-primary more" type="submit">Xem Thêm Sản Phẩm</button></a> -->
+            </div>
    </section>
    <!-- Featured Section End -->
    <!-- Sản Phẩm Mới Nhất -->
@@ -64,38 +61,48 @@
          </div>
          <div class="row featured__filter">
             <?php
-            $sql_product1 = mysqli_query($con, 'SELECT * FROM `product` ORDER BY ProDate DESC Limit 10');
-            while ($row_product1 = mysqli_fetch_array($sql_product1)) {
+            $product_date = mysqli_query($con, 'SELECT * FROM `product` ORDER BY ProDate DESC Limit 10');
+            while ($row_product = mysqli_fetch_array($product_date)) {
             ?>
                <div class="col-lg-3 col-md-4 col-sm-4 product-box">
                   <div class="featured__item">
-                  <a href='shop-details.php?ProID=<?php echo $row_product1['ProID']; ?> '>
-                        <div class="featured__item__pic">
+                     <div class="featured__item__pic">
+                        <a href='shop-details.php?ProID=<?php echo $row_product['ProID']; ?> '>
                            <div class="container-zoom">
-                              <img src="img/all/<?php echo $row_product1['ProPicture'] ?>" alt="" class="zoom-img">
+                              <img src="img/all/<?php echo $row_product['ProPicture'] ?>" alt="" class="zoom-img">
                            </div>
-                           <!-- <h5><span class="badge bg-light text-dark">-20%</span></h5> -->
-
-                     </a>
-                     <!-- <ul class="featured__item__pic__hover">
-                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                     </ul> -->
-                  </div>
-
-                  <div class="featured__item__text">
-                     <h6><a href="#"><?php echo $row_product1['ProName'] ?></a></h6>
-                     <h5><?php echo number_format($row_product1['ProPrice']) ?>₫</h5>
+                           <?php
+                           if ($row_product['ProBasisPrice'] > 0) {
+                           ?>
+                              <span class="badge bg-danger dis">-<?php echo round((($row_product['ProBasisPrice'] - $row_product['ProPrice']) / $row_product['ProBasisPrice']) * 100) ?>%</span>
+                           <?php
+                           }
+                           ?>
+                           <?php
+                           if ($row_product['ProHot'] > 0) {
+                           ?>
+                              <span class="badge bg-warning hot">Hot</span>
+                           <?php
+                           }
+                           ?>
+                        </a>
+                     </div>
+                     <div class="featured__item__text">
+                        <h6><a href="#"><?php echo $row_product['ProName'] ?></a></h6>
+                        <h5><?php echo number_format($row_product['ProPrice']) ?>₫
+                           <?php if ($row_product['ProBasisPrice'] > 0) { ?>
+                              <span class="text1"><s><?php echo number_format($row_product['ProBasisPrice']) ?>₫</s></span>
+                           <?php } ?>
+                        </h5>
+                     </div>
                   </div>
                </div>
-         </div>
-      <?php
+            <?php
             }
-      ?>
-      <div class="col-lg col-md col-sm">
-         <!-- <a href="#"><button class="btn btn-primary more" type="submit">Xem Thêm Sản Phẩm</button></a> -->
-      </div>
+            ?>
+            <div class="col-lg col-md col-sm">
+               <!-- <a href="#"><button class="btn btn-primary more" type="submit">Xem Thêm Sản Phẩm</button></a> -->
+            </div>
    </section>
 
    <section class="featured spad">
@@ -109,38 +116,42 @@
          </div>
          <div class="row featured__filter">
             <?php
-            $sql_product1 = mysqli_query($con, 'SELECT * FROM `product` Where ProHot = 1 Limit 10');
-            while ($row_product1 = mysqli_fetch_array($sql_product1)) {
+            $product_hot = mysqli_query($con, 'SELECT * FROM `product` Where ProHot = 1 Limit 10');
+            while ($row_product = mysqli_fetch_array($product_hot)) {
             ?>
                <div class="col-lg-3 col-md-4 col-sm-4 product-box">
                   <div class="featured__item">
-                  <a href='shop-details.php?ProID=<?php echo $row_product1['ProID']; ?> '>
-                        <div class="featured__item__pic">
+                     <div class="featured__item__pic">
+                        <a href='shop-details.php?ProID=<?php echo $row_product['ProID']; ?> '>
                            <div class="container-zoom">
-                              <img src="img/all/<?php echo $row_product1['ProPicture'] ?>" alt="" class="zoom-img">
+                              <img src="img/all/<?php echo $row_product['ProPicture'] ?>" alt="" class="zoom-img">
                            </div>
-                           <!-- <h5><span class="badge bg-light text-dark">-20%</span></h5> -->
-
-                     </a>
-                     <!-- <ul class="featured__item__pic__hover">
-                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                     </ul> -->
-                  </div>
-
-                  <div class="featured__item__text">
-                     <h6><a href="#"><?php echo $row_product1['ProName'] ?></a></h6>
-                     <h5><?php echo number_format($row_product1['ProPrice']) ?>₫</h5>
+                           <?php
+                           if ($row_product['ProBasisPrice'] > 0) {
+                           ?>
+                              <span class="badge bg-danger dis">-<?php echo round((($row_product['ProBasisPrice'] - $row_product['ProPrice']) / $row_product['ProBasisPrice']) * 100) ?>%</span>
+                           <?php
+                           }
+                           ?>
+                              <span class="badge bg-warning hot">Hot</span>
+                        </a>
+                     </div>
+                     <div class="featured__item__text">
+                        <h6><a href="#"><?php echo $row_product['ProName'] ?></a></h6>
+                        <h5><?php echo number_format($row_product['ProPrice']) ?>₫
+                           <?php if ($row_product['ProBasisPrice'] > 0) { ?>
+                              <span class="text1"><s><?php echo number_format($row_product['ProBasisPrice']) ?>₫</s></span>
+                           <?php } ?>
+                        </h5>
+                     </div>
                   </div>
                </div>
-         </div>
-      <?php
+            <?php
             }
-      ?>
-      <div class="col-lg col-md col-sm">
-         <!-- <a href="#"><button class="btn btn-primary more" type="submit">Xem Thêm Sản Phẩm</button></a> -->
-      </div>
+            ?>
+            <div class="col-lg col-md col-sm">
+               <!-- <a href="#"><button class="btn btn-primary more" type="submit">Xem Thêm Sản Phẩm</button></a> -->
+            </div>
    </section>
    <!-- Banner Begin -->
    <div class="banner">

@@ -25,6 +25,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       // echo"FALSE";
 	}
 }
+$sql_category = mysqli_query($con, 'SELECT * FROM categories');
+$num_items_in_cart = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
+if (!empty($_SESSION["cart"])) {
+   $products1 = mysqli_query($con, "select * from product where ProID in (" . implode(",", array_keys($_SESSION["cart"])) . ")");
+   $tong = 0;
+   while ($row = mysqli_fetch_array($products1)) {
+      $tong += $row['ProPrice'] * $_SESSION['cart'][$row['ProID']];
+   }
+}
+//cate id trang hiện tại
+$cateid  = !empty($_GET['CateID']) ? $_GET['CateID'] : "";
+// echo"$cateid";
 ?>
 <header class="header">
    <div class="header__top">
@@ -71,11 +83,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <nav class="header__menu">
                <ul>
                   <?php
-                  $sql_category = mysqli_query($con, 'SELECT * FROM categories');
+                  $sql_category = mysqli_query($con, 'SELECT * FROM categories Where CateStatus = 1');
                   while ($row_category = mysqli_fetch_array($sql_category)) {
+                     if($cateid != $row_category['CateID']){
                   ?>
-                     <?php echo "<li class ='cate" . $row_category['CateID'] . "'><a href='shop-grid.php?CateID=" . $row_category['CateID'] . "'>" . $row_category['CateName'] . "</a></li>" ?>
-                  <?php
+                     <li><a href='shop-grid.php?CateID=<?= $row_category['CateID']?>'><?=$row_category['CateName']?></a></li>
+                  <?php                    
+                     }
+                     else
+                     {
+                  ?>
+                        <li><a style="color: #cc9966;"><?=$row_category['CateName']?></a></li>
+                  <?php      
+                     }
                   }
                   ?>
                   <li><a href="./contact.html">Contact</a></li>
@@ -84,11 +104,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          </div>
          <div class="col-lg-3">
             <div class="header__cart">
-               <ul>
+            <ul>
                   <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                  <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                  <li><a href="shoping-cart.php"><i class="fa fa-shopping-bag"></i> <span><?= $num_items_in_cart ?></span></a></li>
                </ul>
-               <div class="header__cart__price">item: <span>3.000.000 VNĐ</span></div>
+               <?php if (!empty($_SESSION["cart"])) { ?>
+                  <div class="header__cart__price">item: <span><?= number_format($tong, 0, ",", ".") ?> đ</span></div>
+               <?php } ?>
             </div>
          </div>
       </div>
