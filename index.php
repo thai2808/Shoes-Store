@@ -39,8 +39,8 @@ include_once('connect.php');
    <!-- Categories Section End -->
    <?php
 
-         include('include/search-product.php');
-      
+   include('include/search-product.php');
+
    // 
    ?>
    <!-- Product Section Begin -->
@@ -59,54 +59,53 @@ include_once('connect.php');
          <div class="row">
             <div class="col-lg-12">
                <div class="section-title from-blog__title">
-                  <h3>Thông tin khuyến mãi</h3>
+                  <h3>Tin Tức Shoes Online</h3>
                </div>
             </div>
          </div>
          <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-6">
-               <div class="blog__item">
-                  <div class="blog__item__pic">
-                     <img src="./img/banner/Big-Sale-Banner.jpg" alt="">
-                  </div>
-                  <div class="blog__item__text">
-                     <ul>
-                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                        <li><i class="fa fa-comment-o"></i> 5</li>
-                     </ul>
-                     <h5><a href="#">Cooking tips make cooking simple</a></h5>
-                     <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
-                  </div>
-               </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
-               <div class="blog__item">
-                  <div class="blog__item__pic">
-                     <img src="img/banner/black_friday_banner.jpg" alt="">
-                  </div>
-                  <div class="blog__item__text">
-                     <ul>
-                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                        <li><i class="fa fa-comment-o"></i> 5</li>
-                     </ul>
-                     <h5><a href="#">6 ways to prepare breakfast for 30</a></h5>
-                     <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
-                  </div>
-               </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
-               <div class="blog__item">
-                  <div class="blog__item__pic">
-                     <img src="img/banner/Fashion-Sale-Banner.jpg" alt="">
-                  </div>
-                  <div class="blog__item__text">
-                     <ul>
-                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                        <li><i class="fa fa-comment-o"></i> 5</li>
-                     </ul>
-                     <h5><a href="#">Visit the clean farm in the US</a></h5>
-                     <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
-                  </div>
+         <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="blog__item">
+                        <div class="blog__item__pic">
+                            <img src="img/all/adidas1.jpg" alt="">
+                        </div>
+                        <div class="blog__item__text">
+                            <ul>
+                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                                <li><i class="fa fa-comment-o"></i> 5</li>
+                            </ul>
+                            <h5><a href="#">Cooking tips make cooking simple</a></h5>
+                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
+                        </div>
+                    </div>
+                </div>
+            <div class="col-lg-12">
+               <div class="owl-carousel owl-theme" id="blogCarousel">
+                  <?php
+                  $sql_blog = mysqli_query($con, 'SELECT * FROM `blog`');
+                  while ($row_blog = mysqli_fetch_array($sql_blog)) {
+                     $blogDescription = $row_blog['BlogDescription'];
+                     if (strlen($blogDescription) > 255) {
+                        $blogDescription = substr($blogDescription, 0, 255) . '...';
+                  ?>
+                        <div class="item">
+                           <div class="blog__item">
+                              <div class="blog__item__pic">
+                                 <img src="img/all/<?= $row_blog['BlogImage'] ?>" alt="" class="zoom-img">
+                              </div>
+                              <div class="blog__item__text">
+                                 <ul>
+                                    <li><i class="fa fa-calendar-o"></i> <?= $row_blog['BlogDateCreated'] ?></li>
+                                 </ul>
+                                 <h5><a href="blog-details.php?BlogID=<?= $row_blog["BlogID"] ?>"><?= $row_blog['BlogTittle'] ?></a></h5>
+                                 <p><?= $blogDescription ?></p>
+                              </div>
+                           </div>
+                        </div>
+                  <?php
+                     }
+                  }
+                  ?>
                </div>
             </div>
          </div>

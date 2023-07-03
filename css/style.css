@@ -268,6 +268,7 @@ ol {
 	left: 0;
 	z-index: 999999;
 	background: #000;
+   opacity: 0.4;
 }
 
 .loader {
@@ -1893,7 +1894,9 @@ ol {
 	display: inline-block;
 	margin-right: 6px;
 }
-
+.product__details__quantity .quantity{
+   /* padding-right: 5px; */
+}
 .pro-qty {
 	width: 140px;
 	height: 50px;
@@ -1922,6 +1925,7 @@ ol {
 	cursor: pointer;
 	display: inline-block;
 }
+
 
 .product__details__tab {
 	padding-top: 85px;
@@ -2479,7 +2483,7 @@ ol {
 -----------------------*/
 
 .blog__sidebar {
-	padding-top: 50px;
+	/* padding-top: 50px; */
 }
 
 .blog__sidebar__item {
@@ -2492,61 +2496,9 @@ ol {
 	margin-bottom: 25px;
 }
 
-.blog__sidebar__item ul li {
-	list-style: none;
-}
-
-.blog__sidebar__item ul li a {
-	font-size: 16px;
-	color: #666666;
-	line-height: 48px;
-	-webkit-transition: all, 0.3s;
-	-moz-transition: all, 0.3s;
-	-ms-transition: all, 0.3s;
-	-o-transition: all, 0.3s;
-	transition: all, 0.3s;
-}
-
-.blog__sidebar__item ul li a:hover {
-	color: #cc9966;
-}
-
-.blog__sidebar__search {
-	margin-bottom: 50px;
-}
-
-.blog__sidebar__search form {
-	position: relative;
-}
-
-.blog__sidebar__search form input {
-	width: 100%;
-	height: 46px;
-	font-size: 16px;
-	color: #6f6f6f;
-	padding-left: 15px;
-	border: 1px solid #e1e1e1;
-	border-radius: 20px;
-}
-
-.blog__sidebar__search form input::placeholder {
-	color: #6f6f6f;
-}
-
-.blog__sidebar__search form button {
-	font-size: 16px;
-	color: #6f6f6f;
-	background: transparent;
-	border: none;
-	position: absolute;
-	right: 0;
-	top: 0;
-	height: 100%;
-	padding: 0px 18px;
-}
-
 .blog__sidebar__recent .blog__sidebar__recent__item {
 	display: block;
+
 }
 
 .blog__sidebar__recent .blog__sidebar__recent__item:last-child {
@@ -2556,6 +2508,7 @@ ol {
 .blog__sidebar__recent__item {
 	overflow: hidden;
 	margin-bottom: 20px;
+   width: 300px;
 }
 
 .blog__sidebar__recent__item__pic {
@@ -2564,7 +2517,7 @@ ol {
 }
 
 .blog__sidebar__recent__item__text {
-	overflow: hidden;
+	/* overflow: hidden; */
 }
 
 .blog__sidebar__recent__item__text h6 {

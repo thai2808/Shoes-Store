@@ -4,7 +4,7 @@
    $tukhoa = $_GET['search-product'];
 
    $sql_product2 = "SELECT * FROM product WHERE ProName LIKE '%$tukhoa%'";
-   $result = $con->query($sql_product2);
+   $rss = $con->query($sql_product2);
    // var_dump($result);
    
 ?>
@@ -22,7 +22,7 @@
          <div class="row featured__filter">
             <?php
             
-            while ($row_product2 = $result->fetch_assoc()) {
+            while ($row_product2 = $rss->fetch_assoc()) {
             ?>
                <div class="col-lg-3 col-md-4 col-sm-4 product-box">
                   <div class="featured__item">
@@ -31,7 +31,6 @@
                            <div class="container-zoom">
                               <img src="img/all/<?php echo $row_product2['ProPicture'] ?>" alt="" class="zoom-img">
                            </div>
- 
                      </a>
                   </div>
                   <div class="featured__item__text">
@@ -43,7 +42,7 @@
          </div>
    <?php
             }
- ?>
+?>
 
    <div class="col-lg col-md col-sm">
       <!-- <a href="#"><button class="btn btn-primary more" type="submit">Xem Thêm Sản Phẩm</button></a> -->
@@ -56,9 +55,6 @@
 }
 ?>
    <!-- Featured Section End -->
-   <?php
-  
-   ?>
 
 
    <!-- Banner Begin -->

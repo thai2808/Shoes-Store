@@ -26,7 +26,7 @@ $sql_category = mysqli_query($con, 'SELECT * FROM brand');
                <div class="hero__search__form">
                   <form method="GET" action="" >
                      <input type="text" placeholder="What do you need?" name="search-product">
-                     <button type="submit" class="site-btn" name ="search-btn">SEARCH</button>
+                     <button type="submit" class="site-btn">SEARCH</button>
                   </form>
                </div>
                <div class="hero__search__phone">

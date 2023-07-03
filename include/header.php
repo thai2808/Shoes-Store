@@ -2,7 +2,7 @@
 <?php 
 require('connect.php');
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if (isset( $_POST["txtuser"]) && isset( $_POST["txtpass"]) ) {
    $username = $_POST["txtuser"];
    $password = $_POST["txtpass"];
 
@@ -17,11 +17,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $_SESSION["cusid"] = $row["CusID"];
 		$_SESSION["login_error"] = "";
 		$_SESSION["login"]=TRUE;
-		header("Location: index.php");
+		// header("Location: index.php");
 	} else {
 		$_SESSION["login_error"]="Username or Password incorrect! Please try again!";
 		$_SESSION["login"] = FALSE;     
-		header("Location: index.php");
+		// header("Location: index.php");
       // echo"FALSE";
 	}
 }
@@ -60,7 +60,7 @@ $cateid  = !empty($_GET['CateID']) ? $_GET['CateID'] : "";
                   </div>
                   <div class="header__top__right__auth">
                      <?php if (isset($_SESSION["login"]) && $_SESSION["login"]==TRUE) {
-                        echo "<p>Hello ".$_SESSION['fullname']." <a href='logout.php'><i class='fa fa-user'></i>Logout</a></p>";
+                        echo "Hello ".$_SESSION['fullname']." <a href='logout.php'><i class='fa fa-user'></i>Logout</a>";
                      }
                      else{
                         echo "<a href='#' data-toggle='modal' data-target='#login'><i class='fa fa-user'></i> Login</a>";
@@ -79,7 +79,7 @@ $cateid  = !empty($_GET['CateID']) ? $_GET['CateID'] : "";
                <a href="./index.php"><img src="img/logo-shoes.png" alt=""></a>
             </div>
          </div>
-         <div class="col-lg-6">
+         <div class="col-lg-7">
             <nav class="header__menu">
                <ul>
                   <?php
@@ -98,14 +98,15 @@ $cateid  = !empty($_GET['CateID']) ? $_GET['CateID'] : "";
                      }
                   }
                   ?>
-                  <li><a href="./contact.html">Contact</a></li>
+                  <li><a href="./contact.php"  class="contact">Contact</a></li>
+                  
                </ul>
             </nav>
          </div>
-         <div class="col-lg-3">
+         <div class="col-lg-2">
             <div class="header__cart">
             <ul>
-                  <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                  <!-- <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li> -->
                   <li><a href="shoping-cart.php"><i class="fa fa-shopping-bag"></i> <span><?= $num_items_in_cart ?></span></a></li>
                </ul>
                <?php if (!empty($_SESSION["cart"])) { ?>
