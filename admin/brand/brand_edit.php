@@ -1,23 +1,26 @@
 <?php
-if (isset($_GET["Cid"])) {
-   $Cid = $_GET["Cid"];
-   $qr = "select * from categories where CateID =" . $Cid;
+if (isset($_GET["BraID"])) {
+   $Bid = $_GET["BraID"];
+   $qr = "select * from brand where BraID =" . $Bid;
    $result = $con->query($qr) or die($con->error);
-
-   if ($_SERVER["REQUEST_METHOD"] == "POST") {
-      $Cname = $_POST["txtCate"];
-      $Status = $_POST["rdStatus"];
-      $sql = "UPDATE `categories` SET CateName = '$Cname' , CateStatus='$Status' WHERE CateID =" . $Cid;
-      $rs = $con->query($sql) or die($conn->error);
-      if ($rs == TRUE) {
-         $_SESSION['success_message'] = "Sửa thành công!";
-         header('location: admin.php?manage=categories');
-      } else {
-         echo "<center style='color: red;'>SửaThất Bại</center>";
+   if (isset($_POST['submit'])) {
+      $Bname = $_POST["txtName"];
+      $img = $_FILES['fImg']['name'];
+      $tmp_name = $_FILES['fImg']['tmp_name'];
+      if (isset($Bname) && isset($img)) {
+         if($img != "" ){
+         move_uploaded_file($tmp_name, '../img/brand/' . $img);
+         $sql = "UPDATE `brand` SET `BraName` = '$Bname', `BraImage` = '$img' WHERE `BraID` = '$Bid'";
+         $query = mysqli_query($con, $sql);
+         header('location: admin.php?manage=brand');
+         }else{
+            $sql = "UPDATE `brand` SET `BraName` = '$Bname' WHERE `BraID` = '$Bid'";
+            $query = mysqli_query($con, $sql);
+            header('location: admin.php?manage=brand');
+         }
       }
    }
 }
-
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -48,25 +51,23 @@ if (isset($_GET["Cid"])) {
                <!-- general form elements -->
                <div class="card card-primary">
                   <div class="card-header">
-                     <h3 class="card-title">Sửa Danh Mục</h3>
+                     <h3 class="card-title">Thêm Thương Hiệu</h3>
                   </div>
+
                   <!-- /.card-header -->
                   <!-- form start -->
-                  <form method="POST">
+                  <form method="POST" enctype="multipart/form-data">
                      <div class="card-body">
-                        <div class="form-group">
-                           <label for="exampleInputEmail1">Tên Danh Mục</label>
-                           <?php if (isset($_GET["Cid"])) {
-                              $row = $result->fetch_assoc();
+                        <?php if (isset($_GET["BraID"])) {
+                              $row_bra = $result->fetch_assoc();
                            } ?>
-                           <input type="text" class="form-control" id="exampleInputEmail1" name="txtCate" value="<?=$row["CateName"];?>">
+                        <div class="form-group">
+                           <label for="exampleInputEmail1">Tên Thương Hiệu</label>
+                           <input type="text" class="form-control" id="exampleInputEmail1" name="txtName" value="<?=$row_bra['BraName']?>">
                         </div>
                         <div class="form-group">
-                           <label>Trạng Thái</label>
-                           <div style="padding-right: 600px;display: flex;justify-content: space-evenly;">
-                              <input type=radio value="1" <?php if ($row["CateStatus"] == 1) {echo "checked";} ?> name=rdStatus> Active
-                              <input type=radio value="0" <?php if ($row["CateStatus"] == 0) {echo "checked";} ?> name=rdStatus> Inactive
-                           </div>
+                           <label for="exampleInputEmail1">Hình Ảnh</label>
+                           <input type="file" id="fileInput" name="fImg" value="">
                         </div>
                      </div>
                      <!-- /.card-body -->
@@ -87,5 +88,3 @@ if (isset($_GET["Cid"])) {
    </section>
 </div>
 <!-- </body> -->
-
-</html>

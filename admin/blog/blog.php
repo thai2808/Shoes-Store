@@ -1,49 +1,39 @@
 <?php
-$sql_count = "SELECT COUNT(*) AS total FROM categories";
+$sql_count = "SELECT COUNT(*) AS total FROM blog";
 $result_count = $con->query($sql_count);
 $row_count = $result_count->fetch_assoc();
-$total_cate = $row_count['total'];
+$total_blogs = $row_count['total'];
 
-$per_page = 3;
-$total_pages = ceil($total_cate / $per_page);
+$blogs_per_page = 1;
+$total_pages = ceil($total_blogs / $blogs_per_page);
 
 $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
 
-$offset = ($current_page - 1) * $per_page;
-$sql = "SELECT * FROM categories LIMIT $per_page OFFSET $offset";
+$offset = ($current_page - 1) * $blogs_per_page;
+$sql = "SELECT * FROM blog LIMIT $blogs_per_page OFFSET $offset";
 $rs = $con->query($sql);
-   // $sql = "select * from categories";
-   // $rs = $con->query($sql);
-
 ?>
-
 <script>
-	function xoabl(){
-		var conf= confirm('bạn có muốn xóa bình luận này không?');
-		return conf;
-	}
+   function xoabl() {
+      var conf = confirm('bạn có muốn xóa blog này không?');
+      return conf;
+   }
 </script>
-
-
-
-
 
    <div class="wrapper">
 
-
-      <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
          <!-- Content Header (Page header) -->
          <section class="content-header">
             <div class="container-fluid">
                <div class="row mb-2">
                   <div class="col-sm-6">
-                     <h1>Quản Lý Danh Mục</h1>
+                     <h1>Quản Lý Blog</h1>
                   </div>
                   <div class="col-sm-6">
                      <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Danh Mục</li>
+                        <li class="breadcrumb-item"><a href="../admin.php">Home</a></li>
+                        <li class="breadcrumb-item active">Blog</li>
                      </ol>
                   </div>
                </div>
@@ -57,7 +47,7 @@ $rs = $con->query($sql);
                   <div class="col-md">
                      <div class="card">
                         <div class="card-header">
-                           <a href="admin.php?manage=categories_add"><button  class="btn btn-primary">Thêm Danh Mục</button></a>
+                           <a href="admin.php?manage=blog_add"><button type="submit" class="btn btn-primary">Thêm Blog</button></a>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -65,22 +55,30 @@ $rs = $con->query($sql);
                               <thead>
                                  <tr>
                                     <th style="width: 10px">ID</th>
-                                    <th>Tên Danh Mục</th>
-                                    <th>Trạng Thái</th>
+                                    <th>Ảnh</th>
+                                    <th>Tiêu Đề</th>
+                                    <th>Mô Tả</th>
+                                    <th>Nội Dung</th>
+                                    <th>Admin ID</th>
+                                    <th>Ngày Tạo</th>
                                     <th>Thao Tác</th>
                                  </tr>
                               </thead>
                               <tbody>
-                                 <?php while($row = $rs->fetch_assoc()  ){?>
-                                 <tr>
-                                    <td><?=$row["CateID"]?></td>
-                                    <td><?=$row["CateName"]?></td>
-                                    <td><?=$row["CateStatus"]?></td>
-                                    <td>
-                                    <a href="admin.php?manage=categories_edit&Cid=<?php echo $row['CateID']; ?>"><button type="submit" class="btn btn-warning">Sửa</button></a>
-                                    <a onclick="return xoabl();" href="categories/categories_delete.php?Del=<?=$row['CateID']?>"><button class="btn btn-danger">Xóa</button></a>
-                                    </td>
-                                 </tr>
+                                 <?php while ($row = $rs->fetch_assoc()) { ?>
+                                    <tr>
+                                       <td><?= $row["BlogID"] ?></td>
+                                       <td><img src="../img/all/<?=$row["BlogImage"]?>" alt="" width="200"></td>
+                                       <td><?= $row["BlogTittle"] ?></td>
+                                       <td><?= $row["BlogDescription"] ?></td>
+                                       <td><?= $row["BlogContent"] ?></td>
+                                       <td><?= $row["AdID"] ?></td>
+                                       <td><?= $row["BlogDateCreated"] ?></td>
+                                       <td>
+                                          <a href="admin.php?manage=blog_edit&BlogID=<?php echo $row['BlogID']; ?>"><button type="submit" class="btn btn-warning">Sửa</button>
+                                             <a onclick="return xoabl();" href="blog/blog_delete.php?Del=<?= $row['BlogID'] ?>"><button class="btn btn-danger">Xóa</button>
+                                       </td>
+                                    </tr>
                                  <?php } ?>
                               </tbody>
                            </table>
@@ -89,13 +87,13 @@ $rs = $con->query($sql);
                         <div class="card-footer clearfix">
                            <ul class="pagination pagination-sm m-0 float-right">
                               <?php if ($current_page > 1) : ?>
-                                 <li class="page-item"><a class="page-link" href="?manage=categories&page=1">&laquo;</a></li>
+                                 <li class="page-item"><a class="page-link" href="?manage=blog&page=1">&laquo;</a></li>
                               <?php endif; ?>
                               <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
-                                 <li class="page-item <?= ($i == $current_page) ? 'active' : '' ?>"><a class="page-link" href="?manage=categories&page=<?= $i ?>"><?= $i ?></a></li>
+                                 <li class="page-item <?= ($i == $current_page) ? 'active' : '' ?>"><a class="page-link" href="?manage=blog&page=<?= $i ?>"><?= $i ?></a></li>
                               <?php endfor; ?>
                               <?php if ($current_page < $total_pages) : ?>
-                                 <li class="page-item"><a class="page-link" href="?manage=categories&page=<?=$total_pages?>">&raquo;</a></li>
+                                 <li class="page-item"><a class="page-link" href="?manage=blog&page=<?=$total_pages?>">&raquo;</a></li>
                               <?php endif; ?>
                            </ul>
                         </div>
@@ -119,14 +117,11 @@ $rs = $con->query($sql);
       </div>
       <!-- /.content-wrapper -->
 
-      
-      <!-- Control Sidebar -->
 
+      <!-- Control Sidebar -->
       <aside class="control-sidebar control-sidebar-dark">
          <!-- Control sidebar content goes here -->
       </aside>
       <!-- /.control-sidebar -->
    </div>
    <!-- ./wrapper -->
-   
-   <!-- jQuery -->

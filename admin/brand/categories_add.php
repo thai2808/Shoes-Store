@@ -1,22 +1,18 @@
 <?php
-if (isset($_GET["Cid"])) {
-   $Cid = $_GET["Cid"];
-   $qr = "select * from categories where CateID =" . $Cid;
-   $result = $con->query($qr) or die($con->error);
-
-   if ($_SERVER["REQUEST_METHOD"] == "POST") {
+   if (isset($_POST['submit'])) {
       $Cname = $_POST["txtCate"];
       $Status = $_POST["rdStatus"];
-      $sql = "UPDATE `categories` SET CateName = '$Cname' , CateStatus='$Status' WHERE CateID =" . $Cid;
-      $rs = $con->query($sql) or die($conn->error);
-      if ($rs == TRUE) {
-         $_SESSION['success_message'] = "Sửa thành công!";
+      if(isset($Cname) && isset($Status)){
+      $sql = "insert into categories(CateName,CateStatus) values ('" . $Cname . "'," . $Status . ")";
+      $query = mysqli_query($con, $sql);
+      if ($query == TRUE) {
+         $_SESSION['success_message'] = "Thêm thành công!";
          header('location: admin.php?manage=categories');
       } else {
          echo "<center style='color: red;'>SửaThất Bại</center>";
       }
    }
-}
+   }
 
 ?>
 
@@ -48,7 +44,7 @@ if (isset($_GET["Cid"])) {
                <!-- general form elements -->
                <div class="card card-primary">
                   <div class="card-header">
-                     <h3 class="card-title">Sửa Danh Mục</h3>
+                        <h3 class="card-title">Thêm Danh Mục</h3>
                   </div>
                   <!-- /.card-header -->
                   <!-- form start -->
@@ -56,16 +52,13 @@ if (isset($_GET["Cid"])) {
                      <div class="card-body">
                         <div class="form-group">
                            <label for="exampleInputEmail1">Tên Danh Mục</label>
-                           <?php if (isset($_GET["Cid"])) {
-                              $row = $result->fetch_assoc();
-                           } ?>
-                           <input type="text" class="form-control" id="exampleInputEmail1" name="txtCate" value="<?=$row["CateName"];?>">
+                           <input type="text" class="form-control" id="exampleInputEmail1" name="txtCate" value="">
                         </div>
                         <div class="form-group">
                            <label>Trạng Thái</label>
                            <div style="padding-right: 600px;display: flex;justify-content: space-evenly;">
-                              <input type=radio value="1" <?php if ($row["CateStatus"] == 1) {echo "checked";} ?> name=rdStatus> Active
-                              <input type=radio value="0" <?php if ($row["CateStatus"] == 0) {echo "checked";} ?> name=rdStatus> Inactive
+                              <input type=radio value="1" name=rdStatus> Active
+                              <input type=radio value="0" name=rdStatus> Inactive
                            </div>
                         </div>
                      </div>

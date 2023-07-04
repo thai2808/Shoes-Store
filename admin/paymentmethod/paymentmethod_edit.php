@@ -1,25 +1,23 @@
 <?php
-if (isset($_GET["Cid"])) {
-   $Cid = $_GET["Cid"];
-   $qr = "select * from categories where CateID =" . $Cid;
+if (isset($_GET["PayID"])) {
+   $PayID = $_GET["PayID"];
+   $qr = "select * from paymentmethod where PayID =" . $PayID;
    $result = $con->query($qr) or die($con->error);
 
    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-      $Cname = $_POST["txtCate"];
-      $Status = $_POST["rdStatus"];
-      $sql = "UPDATE `categories` SET CateName = '$Cname' , CateStatus='$Status' WHERE CateID =" . $Cid;
+      $PayType = $_POST["txtPayType"];
+      $sql = "UPDATE `paymentmethod` SET PayType = '$PayType' WHERE PayID =" . $PayID;
       $rs = $con->query($sql) or die($conn->error);
+
       if ($rs == TRUE) {
-         $_SESSION['success_message'] = "Sửa thành công!";
-         header('location: admin.php?manage=categories');
+         echo "<center style='color: green;'>Sửa Thành Công</center>";
+         header('location: admin.php?manage=paymentmethod');
       } else {
-         echo "<center style='color: red;'>SửaThất Bại</center>";
+         echo "<center style='color: red;'>Sửa Thất Bại</center>";
       }
    }
 }
-
 ?>
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
    <!-- Content Header (Page header) -->
@@ -27,11 +25,11 @@ if (isset($_GET["Cid"])) {
       <div class="container-fluid">
          <div class="row mb-2">
             <div class="col-sm-6">
-               <h1>General Form</h1>
+               <h1>Sửa Phương Thức Thanh Toán</h1>
             </div>
             <div class="col-sm-6">
                <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item"><a href="../admin.php">Home</a></li>
                   <li class="breadcrumb-item active">General Form</li>
                </ol>
             </div>
@@ -48,27 +46,19 @@ if (isset($_GET["Cid"])) {
                <!-- general form elements -->
                <div class="card card-primary">
                   <div class="card-header">
-                     <h3 class="card-title">Sửa Danh Mục</h3>
+                     <h3 class="card-title">Sửa Phương Thức Thanh Toán</h3>
                   </div>
                   <!-- /.card-header -->
                   <!-- form start -->
                   <form method="POST">
                      <div class="card-body">
                         <div class="form-group">
-                           <label for="exampleInputEmail1">Tên Danh Mục</label>
-                           <?php if (isset($_GET["Cid"])) {
+                           <label for="exampleInputEmail1">Phương Thức Thanh Toán</label>
+                           <?php if (isset($_GET["PayID"])) {
                               $row = $result->fetch_assoc();
                            } ?>
-                           <input type="text" class="form-control" id="exampleInputEmail1" name="txtCate" value="<?=$row["CateName"];?>">
+                           <input type="text" class="form-control" id="exampleInputEmail1" name="txtPayType" value="<?=$row["PayType"];?>">
                         </div>
-                        <div class="form-group">
-                           <label>Trạng Thái</label>
-                           <div style="padding-right: 600px;display: flex;justify-content: space-evenly;">
-                              <input type=radio value="1" <?php if ($row["CateStatus"] == 1) {echo "checked";} ?> name=rdStatus> Active
-                              <input type=radio value="0" <?php if ($row["CateStatus"] == 0) {echo "checked";} ?> name=rdStatus> Inactive
-                           </div>
-                        </div>
-                     </div>
                      <!-- /.card-body -->
                      <div class="card-footer">
                         <button type="submit" class="btn btn-primary" name="submit">Submit</button>

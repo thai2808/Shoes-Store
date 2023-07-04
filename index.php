@@ -123,7 +123,7 @@ include_once('connect.php');
                while ($row_category1 = mysqli_fetch_array($sql_category1)) {
                ?>
                   <div class="col-lg-3">
-                     <div class="categories__item set-bg" data-setbg="img/categories/<?php echo $row_category1['BraImage'] ?>">
+                     <div class="categories__item set-bg" data-setbg="img/brand/<?php echo $row_category1['BraImage'] ?>">
                         <h5><a href="#"><?php echo $row_category1['BraName'] ?></a></h5>
                      </div>
                   </div>
