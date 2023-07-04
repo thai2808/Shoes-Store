@@ -20,7 +20,7 @@
                   <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                </div>
                <div class="info">
-                  <a href="#" class="d-block">Hi, <?=$row["Username"]?></a>
+                  <a href="#" class="d-block">Hi, <?=$row["AdName"]?></a>
                </div>
             </div>
 
@@ -44,7 +44,7 @@
                   <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                   <li class="nav-item menu-open">
-                     <a href="index.php" class="nav-link active">
+                     <a href="admin.php" class="nav-link active">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                            Dashboard
@@ -52,7 +52,7 @@
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a href="categories.php" class="nav-link">
+                     <a href="admin.php?manage=categories" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
                         <p>
                            Quản lý Danh Mục
@@ -60,7 +60,7 @@
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a href="product.php" class="nav-link">
+                     <a href="admin.php?manage=product" class="nav-link">
                         <i class="nav-icon fas fa-box"></i>
                         <p>
                            Quản lý Sản Phẩm
@@ -68,15 +68,16 @@
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a href="brand.php" class="nav-link">
+                     <a href="admin.php?manage=brand" class="nav-link">
                         <i class="nav-icon fas fa-trademark"></i>
                         <p>
                            Quản lý Thương Hiệu
                         </p>
                      </a>
                   </li>
+                  
                   <li class="nav-item">
-                     <a href="comment.php" class="nav-link">
+                     <a href="admin.php?manage=comment" class="nav-link">
                         <i class="nav-icon fas fa-sharp fa-solid fa-comments"></i>
                         <p>
                            Quản lý Comment
@@ -84,7 +85,7 @@
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a href="customer.php" class="nav-link">
+                     <a href="admin.php?manage=customer" class="nav-link">
                         <i class="nav-icon fas fa-regular fa-users"></i>
                         <p>
                            Quản lý Khách Hàng
@@ -92,11 +93,29 @@
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a href="paymentmethod.php" class="nav-link">
+                     <a href="admin.php?manage=paymentmethod" class="nav-link">
                         <!-- <i class="nav-icon fas fa-copy"></i> -->
                         <i class="nav-icon fas fa-light fa-credit-card"></i>
                         <p>
                            Quản Lý Thanh Toán
+                        </p>
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a href="admin.php?manage=blog" class="nav-link">
+                        <!-- <i class="nav-icon fas fa-copy"></i> -->
+                        <i class="nav-icon fas fa-blog"></i>
+                        <p>
+                           Quản Lý Blog
+                        </p>
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a href="admin.php?manage=image" class="nav-link">
+                        <!-- <i class="nav-icon fas fa-copy"></i> -->
+                        <i class="nav-icon fas fa-images"></i>
+                        <p>
+                           Quản Lý Ảnh Sản Phẩm
                         </p>
                      </a>
                   </li>

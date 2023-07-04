@@ -45,7 +45,7 @@
             }
             ?>
             <div class="col-lg col-md col-sm">
-               <!-- <a href="#"><button class="btn btn-primary more" type="submit">Xem Thêm Sản Phẩm</button></a> -->
+               <a href="shop-grid.php?Category=Sale"><button class="btn btn-primary more" type="submit">Xem Thêm Sản Phẩm</button></a>
             </div>
    </section>
    <!-- Featured Section End -->

@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	} else {
 		$_SESSION["login_error"]="Username or Password incorrect! Please try again!";
 		$_SESSION["login"] = FALSE;
-		header("Location: loginv2.php");
+		header("Location: admin.php");
 	}
 }
 ?>

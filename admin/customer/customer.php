@@ -1,7 +1,6 @@
 <?php
-   session_start();
-   require("../connect.php");
-   $sql = "select * from comments";
+
+   $sql = "select * from customer";
    $rs = $con->query($sql);
 ?>
 <!DOCTYPE html>
@@ -23,16 +22,7 @@
 
 <body class="hold-transition sidebar-mini">
    <div class="wrapper">
-      <!-- Navbar -->
-      <?php
-         include('share/header_admin.php');
-      ?>
-      <!-- /.navbar -->
 
-      <!-- Main Sidebar Container -->
-      <?php
-         include('share/sidebar.php');
-      ?>
 
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -46,7 +36,7 @@
                   <div class="col-sm-6">
                      <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Comment</li>
+                        <li class="breadcrumb-item active">Danh Mục</li>
                      </ol>
                   </div>
                </div>
@@ -60,7 +50,7 @@
                   <div class="col-md">
                      <div class="card">
                         <div class="card-header">
-                           <button type="submit" class="btn btn-primary">Thêm Comment</button>
+                           <button type="submit" class="btn btn-primary">Thêm Danh Mục</button>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -68,19 +58,26 @@
                               <thead>
                                  <tr>
                                     <th style="width: 10px">ID</th>
-                                    <th>Thời Gian</th>
-                                    <th>Comment</th>
-                                    <th>Đánh Giá (Sao)</th>
-                                    <th style="width: 170px">Thao Tác</th>
+                                    <th>Tên Khách Hàng</th>
+                                    <th>Tài Khoản KH</th>
+                                    <th>Mật Khẩu</th>
+                                    <th>Số Điện Thoại</th>
+                                    <th>Email</th>
+                                    <th>Địa Chỉ</th>
+                                    <th>Trạng Thái</th>
                                  </tr>
                               </thead>
                               <tbody>
                                  <?php while($row = $rs->fetch_assoc()  ){?>
                                  <tr>
-                                    <td><?=$row["ComID"]?></td>
-                                    <td><?=$row["ComDate"]?></td>
-                                    <td><?=$row["ComContent"]?></td>
-                                    <td><?=$row["Star"]?></td>
+                                    <td><?=$row["CusID"]?></td>
+                                    <td><?=$row["CusName"]?></td>
+                                    <td><?=$row["CusUser"]?></td>
+                                    <td><?=$row["CusPass"]?></td>
+                                    <td><?=$row["CusPhone"]?></td>
+                                    <td><?=$row["CusMail"]?></td>
+                                    <td><?=$row["CusAdr"]?></td>
+                                    <td><?=$row["CusStatus"]?></td>
                                     <td>
                                        <button type="submit" class="btn btn-warning">Sửa</button>
                                        <button class="btn btn-danger">Xóa</button>

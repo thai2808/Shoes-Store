@@ -5,10 +5,10 @@ session_start();
 unset($_SESSION["fullname"]);
 unset($_SESSION["login"]);
 
-unset($_SESSION['cart']);
-unset($_SESSION["size"]);
+// unset($_SESSION['cart']);
+// unset($_SESSION["size"]);
 // // Xóa toàn bộ phiên làm việc
-// session_destroy();
+session_destroy();
 
 // Chuyển hướng người dùng về trang chủ
 header("Location: index.php");

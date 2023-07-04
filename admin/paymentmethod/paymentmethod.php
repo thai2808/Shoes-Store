@@ -1,15 +1,6 @@
 <?php
-   session_start();
-   require("../connect.php");
-   $sql = "select * from categories";
+   $sql = "select * from paymentmethod";
    $rs = $con->query($sql);
-
-   If(isset($_GET["Del"])){
-      $Cid = $_GET["Del"];
-      $del = "UPDATE `categories` SET CateStatus='0' WHERE CateID =".$Cid;
-      $rs = $con->query($del);
-      header('Location:categories.php');
-   }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,18 +21,7 @@
 
 <body class="hold-transition sidebar-mini">
    <div class="wrapper">
-      <!-- Navbar -->
-      <?php
-         include('share/header_admin.php');
-      ?>
-      <!-- /.navbar -->
 
-      <!-- Main Sidebar Container -->
-      <?php
-         include('share/sidebar.php');
-      ?>
-
-      <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
          <!-- Content Header (Page header) -->
          <section class="content-header">
@@ -53,7 +33,7 @@
                   <div class="col-sm-6">
                      <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Danh Mục</li>
+                        <li class="breadcrumb-item active">Thanh Toán</li>
                      </ol>
                   </div>
                </div>
@@ -67,7 +47,7 @@
                   <div class="col-md">
                      <div class="card">
                         <div class="card-header">
-                           <a href="categories_add.php"><button  class="btn btn-primary">Thêm Danh Mục</button></a>
+                           <button type="submit" class="btn btn-primary">Thêm Phương Thức Thanh Toán</button>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -75,20 +55,18 @@
                               <thead>
                                  <tr>
                                     <th style="width: 10px">ID</th>
-                                    <th>Tên Danh Mục</th>
-                                    <th>Trạng Thái</th>
+                                    <th>Phương Thức Thanh Toán</th>
                                     <th>Thao Tác</th>
                                  </tr>
                               </thead>
                               <tbody>
                                  <?php while($row = $rs->fetch_assoc()  ){?>
                                  <tr>
-                                    <td><?=$row["CateID"]?></td>
-                                    <td><?=$row["CateName"]?></td>
-                                    <td><?=$row["CateStatus"]?></td>
+                                    <td><?=$row["PayID"]?></td>
+                                    <td><?=$row["PayType"]?></td>
                                     <td>
-                                    <a href="categories_add.php?Edit_id=<?=$row["CateID"]?>"><button type="submit" class="btn btn-warning">Sửa</button></a>
-                                    <a href="?Del=<?=$row["CateID"]?>"><button class="btn btn-danger">Xóa</button></a>
+                                       <button type="submit" class="btn btn-warning">Sửa</button>
+                                       <button class="btn btn-danger">Xóa</button>
                                     </td>
                                  </tr>
                                  <?php } ?>

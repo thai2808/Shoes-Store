@@ -1,7 +1,6 @@
 <?php
-   session_start();
-   require("../connect.php");
-   $sql = "select * from paymentmethod";
+
+   $sql = "select * from brand";
    $rs = $con->query($sql);
 ?>
 <!DOCTYPE html>
@@ -24,15 +23,7 @@
 <body class="hold-transition sidebar-mini">
    <div class="wrapper">
       <!-- Navbar -->
-      <?php
-         include('share/header_admin.php');
-      ?>
-      <!-- /.navbar -->
 
-      <!-- Main Sidebar Container -->
-      <?php
-         include('share/sidebar.php');
-      ?>
 
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -46,7 +37,7 @@
                   <div class="col-sm-6">
                      <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Thanh Toán</li>
+                        <li class="breadcrumb-item active">Thương Hiệu</li>
                      </ol>
                   </div>
                </div>
@@ -60,7 +51,7 @@
                   <div class="col-md">
                      <div class="card">
                         <div class="card-header">
-                           <button type="submit" class="btn btn-primary">Thêm Phương Thức Thanh Toán</button>
+                           <button type="submit" class="btn btn-primary">Thêm Thương Hiệu</button>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -68,15 +59,17 @@
                               <thead>
                                  <tr>
                                     <th style="width: 10px">ID</th>
-                                    <th>Phương Thức Thanh Toán</th>
+                                    <th>Tên Thương Hiệu</th>
+                                    <th>Ảnh</th>
                                     <th>Thao Tác</th>
                                  </tr>
                               </thead>
                               <tbody>
                                  <?php while($row = $rs->fetch_assoc()  ){?>
                                  <tr>
-                                    <td><?=$row["PayID"]?></td>
-                                    <td><?=$row["PayType"]?></td>
+                                    <td><?=$row["BraID"]?></td>
+                                    <td><?=$row["BraName"]?></td>
+                                    <td><img src="../img/categories/<?=$row["BraImage"]?>" alt="" width="200px"></td>
                                     <td>
                                        <button type="submit" class="btn btn-warning">Sửa</button>
                                        <button class="btn btn-danger">Xóa</button>

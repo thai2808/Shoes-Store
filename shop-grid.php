@@ -74,11 +74,20 @@ if (isset($_GET['CateID']) && isset($_GET['BraID'])) {
    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
    <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
+<?php
+if (isset($_GET['Category'])) {
+?>
+   <style>
+   .header__menu ul li a.sale {
+         color: #cc9966;
+      }
+   </style>
+<?php } ?>
 
 <body>
-<div id="preloder">
-        <div class="loader"></div>
-    </div>
+   <div id="preloder">
+      <div class="loader"></div>
+   </div>
    <!-- Header Section Begin -->
    <?php include('include/header.php') ?>
    <!-- Header Section End -->
@@ -132,66 +141,106 @@ if (isset($_GET['CateID']) && isset($_GET['BraID'])) {
    </section>
    <!-- Breadcrumb Section End -->
    <?php
-if(isset($_GET['search-product'])){
-include('include/search-product.php');}else{
-
-// 
-?>
-   <!-- Product Section Begin -->
-   <section class="product spad">
-      <div class="container">
-         <div class="row">
-            <div class="col-lg-3 col-md-5">
-               <div class="sidebar">
-                  <!-- ----------- Chon Brand khi đã có Cate --------- -->
-                  <div class="sidebar__item">
-                     <h4>Thương Hiệu</h4>
-                     <ul>
-                        <?php
-                        $braid = isset($_GET["BraID"]) ? $_GET["BraID"] : "";
-                        if (isset($_GET['CateID'])) {
-                           $cid = $_GET['CateID'];
-                           $brasql = "Select * from brand ";
-                           $rs = $con->query($brasql) or die($con->error);
-                           while ($row = $rs->fetch_assoc()) {
-                              if ($braid != $row['BraID']) {
-                        ?>
-                                 <li>
-                                    <input type="checkbox" name="brand" value="CateID=<?= $cid ?>&BraID=<?= $row['BraID'] ?>" onchange="handleCheckboxChange(this)">
-                                    <a><?= $row['BraName'] ?></a>
-                                 </li>
-                              <?php
-                              } else {
-                              ?>
-                                 <input type="checkbox" name="brand" checked>
-                                 <a><?= $row['BraName'] ?></a>
-                        <?php
-                              }
-                           }
-                        }
-                        ?>
-                     </ul>
+   if (isset($_GET['search-product'])) {
+      include('include/search-product.php');
+   } elseif (isset($_GET['Category'])) { ?>
+      <section class="featured spad">
+         <div class="container text-center">
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="section-title">
+                     <h4>Sản Phẩm Sale</h4>
                   </div>
-                  <!-- ----------- Chon Brand khi đã có Cate --------- -->
-                  <!-- ------------ Chọn khoảng giá của sản phẩm------------- -->
-                  <div class="sidebar__item">
-                     <h4>Price</h4>
-                     <div class="price-range-wrap">
-                        <div id="myRange" class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-min="500000" data-max="6000000" oninput="updateURL()">
-                           <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
-                           <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                           <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+               </div>
+            </div>
+            <div class="row featured__filter">
+               <?php
+               $sql_product = mysqli_query($con, 'SELECT * FROM `product` WHERE ProBasisPrice > 0');
+               while ($row_product = mysqli_fetch_array($sql_product)) {
+               ?>
+                  <div class="col-lg-3 col-md-4 col-sm-4 product-box">
+                     <div class="featured__item">
+                        <div class="featured__item__pic">
+                           <a href='shop-details.php?ProID=<?php echo $row_product['ProID']; ?> '>
+                              <div class="container-zoom">
+                                 <img src="img/all/<?php echo $row_product['ProPicture'] ?>" alt="" class="zoom-img">
+                              </div>
+                              <span class="badge bg-danger dis">-<?php echo round((($row_product['ProBasisPrice'] - $row_product['ProPrice']) / $row_product['ProBasisPrice']) * 100) ?>%</span>
+
+                           </a>
                         </div>
-                        <div class="range-slider">
-                           <div class="price-input">
-                              <input type="text" id="minamount">
-                              <input type="text" id="maxamount">
-                           </div>
+                        <div class="featured__item__text">
+                           <h6><a href="#"><?php echo $row_product['ProName'] ?></a></h6>
+                           <h5><?php echo number_format($row_product['ProPrice']) ?>₫
+                              <span class="text1"><s><?php echo number_format($row_product['ProBasisPrice']) ?>₫</s></span>
+                           </h5>
                         </div>
                      </div>
                   </div>
-                  <!-- ------------ Chọn khoảng giá của sản phẩm------------- -->
-                  <!-- <div class="sidebar__item">
+               <?php
+               }
+               ?>
+      </section>
+   <?php
+   } else {
+   ?>
+
+
+      <!-- Product Section Begin -->
+      <section class="product spad">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-3 col-md-5">
+                  <div class="sidebar">
+                     <!-- ----------- Chon Brand khi đã có Cate --------- -->
+                     <div class="sidebar__item">
+                        <h4>Thương Hiệu</h4>
+                        <ul>
+                           <?php
+                           $braid = isset($_GET["BraID"]) ? $_GET["BraID"] : "";
+                           if (isset($_GET['CateID'])) {
+                              $cid = $_GET['CateID'];
+                              $brasql = "Select * from brand ";
+                              $rs = $con->query($brasql) or die($con->error);
+                              while ($row = $rs->fetch_assoc()) {
+                                 if ($braid != $row['BraID']) {
+                           ?>
+                                    <li>
+                                       <input type="checkbox" name="brand" value="CateID=<?= $cid ?>&BraID=<?= $row['BraID'] ?>" onchange="handleCheckboxChange(this)">
+                                       <a><?= $row['BraName'] ?></a>
+                                    </li>
+                                 <?php
+                                 } else {
+                                 ?>
+                                    <input type="checkbox" name="brand" checked>
+                                    <a><?= $row['BraName'] ?></a>
+                           <?php
+                                 }
+                              }
+                           }
+                           ?>
+                        </ul>
+                     </div>
+                     <!-- ----------- Chon Brand khi đã có Cate --------- -->
+                     <!-- ------------ Chọn khoảng giá của sản phẩm------------- -->
+                     <div class="sidebar__item">
+                        <h4>Price</h4>
+                        <div class="price-range-wrap">
+                           <div id="myRange" class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-min="500000" data-max="6000000" oninput="updateURL()">
+                              <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
+                              <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                              <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                           </div>
+                           <div class="range-slider">
+                              <div class="price-input">
+                                 <input type="text" id="minamount">
+                                 <input type="text" id="maxamount">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- ------------ Chọn khoảng giá của sản phẩm------------- -->
+                     <!-- <div class="sidebar__item">
                      <h4>Popular Size</h4>
                      <div class="sidebar__item__size">
                         <label for="large">
@@ -218,102 +267,102 @@ include('include/search-product.php');}else{
                         </label>
                      </div>
                   </div> -->
+                  </div>
                </div>
-            </div>
-            <div class="col-lg-9 col-md-7">
+               <div class="col-lg-9 col-md-7">
 
-               <div class="filter__item">
-                  <div class="row">
-                     <div class="col-lg-4 col-md-5">
-                        <div class="filter__sort">
-                           <span>Sort By</span>
-                           <select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
-                              <option value="">Default</option>
-                              <option value="?<?= $param ?>&field=ProPrice&sort=asc">Price Thấp - Cao</option>
-                              <option value="?<?= $param ?>&field=ProPrice&sort=DESC">Price Cao - Thấp</option>
-                           </select>
+                  <div class="filter__item">
+                     <div class="row">
+                        <div class="col-lg-4 col-md-5">
+                           <div class="filter__sort">
+                              <span>Sort By</span>
+                              <select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+                                 <option value="">Default</option>
+                                 <option value="?<?= $param ?>&field=ProPrice&sort=asc">Price Thấp - Cao</option>
+                                 <option value="?<?= $param ?>&field=ProPrice&sort=DESC">Price Cao - Thấp</option>
+                              </select>
+                           </div>
                         </div>
-                     </div>
-                     <div class="col-lg-4 col-md-4">
-                        <div class="filter__found">
-                           <!-- <h6><span>16</span> Products found</h6> -->
+                        <div class="col-lg-4 col-md-4">
+                           <div class="filter__found">
+                              <!-- <h6><span>16</span> Products found</h6> -->
+                           </div>
                         </div>
-                     </div>
-                     <div class="col-lg-4 col-md-3">
-                        <div class="filter__option">
-                           <span class="icon_grid-2x2"></span>
-                           <span class="icon_ul"></span>
+                        <div class="col-lg-4 col-md-3">
+                           <div class="filter__option">
+                              <span class="icon_grid-2x2"></span>
+                              <span class="icon_ul"></span>
+                           </div>
                         </div>
                      </div>
                   </div>
-               </div>
-               <!-- --------------- Chọn Kiểu Sắp xếp sản phẩm ------------ -->
-               <!-- ------------------San Pham--------------- -->
-               <div>
-                  <div class="row featured__filter">
-                     <?php
-                     if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                     ?>
-                           <div class="col-lg-3 col-md-4 col-sm-6">
-                              <div class="featured__item">
-                                 <a href='shop-details.php?ProID=<?php echo $row['ProID']; ?> '>
-                                    <div class="featured__item__pic">
-                                       <div class="container-zoom">
-                                          <img src="img/all/<?php echo $row['ProPicture'] ?>" alt="" class="zoom-img">
+                  <!-- --------------- Chọn Kiểu Sắp xếp sản phẩm ------------ -->
+                  <!-- ------------------San Pham--------------- -->
+                  <div>
+                     <div class="row featured__filter">
+                        <?php
+                        if ($result->num_rows > 0) {
+                           while ($row = $result->fetch_assoc()) {
+                        ?>
+                              <div class="col-lg-3 col-md-4 col-sm-6">
+                                 <div class="featured__item">
+                                    <a href='shop-details.php?ProID=<?php echo $row['ProID']; ?> '>
+                                       <div class="featured__item__pic">
+                                          <div class="container-zoom">
+                                             <img src="img/all/<?php echo $row['ProPicture'] ?>" alt="" class="zoom-img">
+                                          </div>
                                        </div>
+                                    </a>
+                                    <div class="featured__item__text">
+                                       <h6><a href="#"><?php echo $row['ProName'] ?></a></h6>
+                                       <h5><?php echo number_format($row['ProPrice']) ?>₫
+                                          <?php if ($row['ProBasisPrice'] > 0) { ?>
+                                             <span class="text1"><s><?php echo number_format($row['ProBasisPrice']) ?>₫</s></span>
+                                          <?php } ?>
+                                       </h5>
                                     </div>
-                                 </a>
-                                 <div class="featured__item__text">
-                                    <h6><a href="#"><?php echo $row['ProName'] ?></a></h6>
-                                    <h5><?php echo number_format($row['ProPrice']) ?>₫
-                                       <?php if ($row['ProBasisPrice'] > 0) { ?>
-                                          <span class="text1"><s><?php echo number_format($row['ProBasisPrice']) ?>₫</s></span>
-                                       <?php } ?>
-                                    </h5>
                                  </div>
                               </div>
-                           </div>
-                     <?php
+                        <?php
+                           }
                         }
-                     }
-                     ?>
+                        ?>
+                     </div>
                   </div>
-               </div>
-               <!-- ------------------San Pham--------------- -->
-               <!-- ------------------Phan trang--------------- -->
-               <div class="product__pagination">
-                  <?php if ($current_page > 1) {
-                     $prevpage = $current_page - 1;
-                  ?>
-                     <a href="?<?= $param ?>&limit=<?= $limit ?>&page=<?= $prevpage ?>"><i class="fa fa-long-arrow-left"></i></a>
-                  <?php } ?>
-                  <?php $total = $total->num_rows;
-                  // var_dump($total);
-                  $totalpage = ceil($total / $limit);
-                  for ($num = 1; $num <= $totalpage; $num++) { ?>
-                     <?php if ($current_page != $num) { ?>
-                        <a href="?<?= $param ?>&limit=<?= $limit ?>&page=<?= $num ?>"><?= $num ?></a>
-                     <?php } else { ?>
-                        <a style="background-color: #cc9966;color:white"><?= $num ?></a>
+                  <!-- ------------------San Pham--------------- -->
+                  <!-- ------------------Phan trang--------------- -->
+                  <div class="product__pagination">
+                     <?php if ($current_page > 1) {
+                        $prevpage = $current_page - 1;
+                     ?>
+                        <a href="?<?= $param ?>&limit=<?= $limit ?>&page=<?= $prevpage ?>"><i class="fa fa-long-arrow-left"></i></a>
                      <?php } ?>
-                  <?php } ?>
-                  <?php if ($current_page <= $totalpage - 1) {
-                     $nextpage = $current_page + 1;
-                  ?>
-                     <a href="?<?= $param ?>&limit=<?= $limit ?>&page=<?= $nextpage ?>"><i class="fa fa-long-arrow-right"></i></a>
-                  <?php } ?>
+                     <?php $total = $total->num_rows;
+                     // var_dump($total);
+                     $totalpage = ceil($total / $limit);
+                     for ($num = 1; $num <= $totalpage; $num++) { ?>
+                        <?php if ($current_page != $num) { ?>
+                           <a href="?<?= $param ?>&limit=<?= $limit ?>&page=<?= $num ?>"><?= $num ?></a>
+                        <?php } else { ?>
+                           <a style="background-color: #cc9966;color:white"><?= $num ?></a>
+                        <?php } ?>
+                     <?php } ?>
+                     <?php if ($current_page <= $totalpage - 1) {
+                        $nextpage = $current_page + 1;
+                     ?>
+                        <a href="?<?= $param ?>&limit=<?= $limit ?>&page=<?= $nextpage ?>"><i class="fa fa-long-arrow-right"></i></a>
+                     <?php } ?>
+                  </div>
+                  <!-- ------------------Phan trang--------------- -->
                </div>
-               <!-- ------------------Phan trang--------------- -->
             </div>
          </div>
-      </div>
-   </section>
-   <!-- Product Section End -->
+      </section>
+      <!-- Product Section End -->
 
-   <!-- Footer Section Begin -->
+      <!-- Footer Section Begin -->
    <?php
-}
+   }
    include("include/footer.php");
    ?>
    <!-- Footer Section End -->

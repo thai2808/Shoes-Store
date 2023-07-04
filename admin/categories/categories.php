@@ -1,38 +1,18 @@
 <?php
-   session_start();
-   require("../connect.php");
-   $sql = "select * from product";
+   $sql = "select * from categories";
    $rs = $con->query($sql);
+
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-   <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <title>AdminLTE 3 | Simple Tables</title>
-
-   <!-- Google Font: Source Sans Pro -->
-   <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-   <!-- Font Awesome -->
-   <link rel="stylesheet" href="./plugins/fontawesome-free/css/all.min.css">
-   <!-- Theme style -->
-   <link rel="stylesheet" href="./dist/css/adminlte.min.css">
-</head>
-
+<script>
+	function xoabl(){
+		var conf= confirm('bạn có muốn xóa bình luận này không?');
+		return conf;
+	}
+</script>
 <body class="hold-transition sidebar-mini">
    <div class="wrapper">
-      <!-- Navbar -->
-      <?php
-         include('share/header_admin.php');
-      ?>
-      <!-- /.navbar -->
 
-      <!-- Main Sidebar Container -->
-      <?php
-         include('share/sidebar.php');
-      ?>
 
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -60,7 +40,7 @@
                   <div class="col-md">
                      <div class="card">
                         <div class="card-header">
-                           <button type="submit" class="btn btn-primary">Thêm Danh Mục</button>
+                           <a href="admin.php?manage=categories_add"><button  class="btn btn-primary">Thêm Danh Mục</button></a>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -68,32 +48,20 @@
                               <thead>
                                  <tr>
                                     <th style="width: 10px">ID</th>
-                                    <th>Tên Sản Phẩm</th>
-                                    <th>Giá Sản Phẩm</th>
-                                    <th>Giá Khuyễn Mãi</th>
-                                    <th>Số Lượng</th>
-                                    <th>Thời Gian</th>
-                                    <th>Sản Phầm Hot</th>
-                                    <th>Ảnh</th>
-                                    <th>Thông Tin Sản Phẩm</th>
-                                    <th style="width:130px">Thao Tác</th>
+                                    <th>Tên Danh Mục</th>
+                                    <th>Trạng Thái</th>
+                                    <th>Thao Tác</th>
                                  </tr>
                               </thead>
                               <tbody>
                                  <?php while($row = $rs->fetch_assoc()  ){?>
                                  <tr>
-                                    <td><?=$row["ProID"]?></td>
-                                    <td><?=$row["ProName"]?></td>
-                                    <td><?=$row["ProPrice"]?></td>
-                                    <td><?=$row["ProBasisPrice"]?></td>
-                                    <td><?=$row["ProNumber"]?></td>
-                                    <td><?=$row["ProDate"]?></td>
-                                    <td><?=$row["ProHot"]?></td>
-                                    <td><img src="../img/all/<?=$row["ProPicture"]?>" alt="" width="200"></td>
-                                    <td><?=$row["ProInfo"]?></td>
+                                    <td><?=$row["CateID"]?></td>
+                                    <td><?=$row["CateName"]?></td>
+                                    <td><?=$row["CateStatus"]?></td>
                                     <td>
-                                       <button type="submit" class="btn btn-warning">Sửa</button>
-                                       <button class="btn btn-danger">Xóa</button>
+                                    <a href="admin.php?manage=categories_edit&Cid=<?php echo $row['CateID']; ?>"><button type="submit" class="btn btn-warning">Sửa</button></a>
+                                    <a onclick="return xoabl();" href="categories/categories_delete.php?Del=<?=$row['CateID']?>"><button class="btn btn-danger">Xóa</button></a>
                                     </td>
                                  </tr>
                                  <?php } ?>
@@ -140,13 +108,3 @@
    <!-- ./wrapper -->
 
    <!-- jQuery -->
-   <script src="./plugins/jquery/jquery.min.js"></script>
-   <!-- Bootstrap 4 -->
-   <script src="./plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-   <!-- AdminLTE App -->
-   <script src="./dist/js/adminlte.min.js"></script>
-   <!-- AdminLTE for demo purposes -->
-   <script src="./dist/js/demo.js"></script>
-</body>
-
-</html>

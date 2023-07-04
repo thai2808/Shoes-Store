@@ -1,7 +1,5 @@
 <?php
-   session_start();
-   require("../connect.php");
-   $sql = "select * from brand";
+   $sql = "select * from product";
    $rs = $con->query($sql);
 ?>
 <!DOCTYPE html>
@@ -23,16 +21,6 @@
 
 <body class="hold-transition sidebar-mini">
    <div class="wrapper">
-      <!-- Navbar -->
-      <?php
-         include('share/header_admin.php');
-      ?>
-      <!-- /.navbar -->
-
-      <!-- Main Sidebar Container -->
-      <?php
-         include('share/sidebar.php');
-      ?>
 
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -46,7 +34,7 @@
                   <div class="col-sm-6">
                      <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Thương Hiệu</li>
+                        <li class="breadcrumb-item active">Danh Mục</li>
                      </ol>
                   </div>
                </div>
@@ -60,7 +48,7 @@
                   <div class="col-md">
                      <div class="card">
                         <div class="card-header">
-                           <button type="submit" class="btn btn-primary">Thêm Thương Hiệu</button>
+                           <button type="submit" class="btn btn-primary">Thêm Danh Mục</button>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -68,17 +56,29 @@
                               <thead>
                                  <tr>
                                     <th style="width: 10px">ID</th>
-                                    <th>Tên Thương Hiệu</th>
+                                    <th>Tên Sản Phẩm</th>
+                                    <th>Giá Sản Phẩm</th>
+                                    <th>Giá Khuyễn Mãi</th>
+                                    <th>Số Lượng</th>
+                                    <th>Thời Gian</th>
+                                    <th>Sản Phầm Hot</th>
                                     <th>Ảnh</th>
-                                    <th>Thao Tác</th>
+                                    <th>Thông Tin Sản Phẩm</th>
+                                    <th style="width:130px">Thao Tác</th>
                                  </tr>
                               </thead>
                               <tbody>
                                  <?php while($row = $rs->fetch_assoc()  ){?>
                                  <tr>
-                                    <td><?=$row["BraID"]?></td>
-                                    <td><?=$row["BraName"]?></td>
-                                    <td><img src="../img/categories/<?=$row["BraImage"]?>" alt="" width="200px"></td>
+                                    <td><?=$row["ProID"]?></td>
+                                    <td><?=$row["ProName"]?></td>
+                                    <td><?=$row["ProPrice"]?></td>
+                                    <td><?=$row["ProBasisPrice"]?></td>
+                                    <td><?=$row["ProNumber"]?></td>
+                                    <td><?=$row["ProDate"]?></td>
+                                    <td><?=$row["ProHot"]?></td>
+                                    <td><img src="../img/all/<?=$row["ProPicture"]?>" alt="" width="200"></td>
+                                    <td><?=$row["ProInfo"]?></td>
                                     <td>
                                        <button type="submit" class="btn btn-warning">Sửa</button>
                                        <button class="btn btn-danger">Xóa</button>

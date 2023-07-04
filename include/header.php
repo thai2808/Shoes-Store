@@ -98,6 +98,7 @@ $cateid  = !empty($_GET['CateID']) ? $_GET['CateID'] : "";
                      }
                   }
                   ?>
+                  <li><a href="shop-grid.php?Category=Sale"  class="sale">Sale</a></li>
                   <li><a href="./contact.php"  class="contact">Contact</a></li>
                   
                </ul>
