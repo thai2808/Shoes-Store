@@ -47,7 +47,6 @@ if (isset($_GET['CateID']) && isset($_GET['BraID'])) {
       $total = $con->query($total_sql);
    }
 }
-
 // ------------------------Hien Thi San Pham------------------- //
 
 ?>
@@ -79,7 +78,7 @@ if (isset($_GET['CateID']) && isset($_GET['BraID'])) {
 if (isset($_GET['Category'])) {
 ?>
    <style>
-      .header__menu ul li a.sale {
+   .header__menu ul li a.sale {
          color: #cc9966;
       }
    </style>
@@ -223,7 +222,51 @@ if (isset($_GET['Category'])) {
                         </ul>
                      </div>
                      <!-- ----------- Chon Brand khi đã có Cate --------- -->
-
+                     <!-- ------------ Chọn khoảng giá của sản phẩm------------- -->
+                     <div class="sidebar__item">
+                        <h4>Price</h4>
+                        <div class="price-range-wrap">
+                           <div id="myRange" class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-min="500000" data-max="6000000" oninput="updateURL()">
+                              <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
+                              <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                              <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                           </div>
+                           <div class="range-slider">
+                              <div class="price-input">
+                                 <input type="text" id="minamount">
+                                 <input type="text" id="maxamount">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- ------------ Chọn khoảng giá của sản phẩm------------- -->
+                     <!-- <div class="sidebar__item">
+                     <h4>Popular Size</h4>
+                     <div class="sidebar__item__size">
+                        <label for="large">
+                           Large
+                           <input type="radio" id="large">
+                        </label>
+                     </div>
+                     <div class="sidebar__item__size">
+                        <label for="medium">
+                           Medium
+                           <input type="radio" id="medium">
+                        </label>
+                     </div>
+                     <div class="sidebar__item__size">
+                        <label for="small">
+                           Small
+                           <input type="radio" id="small">
+                        </label>
+                     </div>
+                     <div class="sidebar__item__size">
+                        <label for="tiny">
+                           Tiny
+                           <input type="radio" id="tiny">
+                        </label>
+                     </div>
+                  </div> -->
                   </div>
                </div>
                <div class="col-lg-9 col-md-7">
@@ -289,33 +332,27 @@ if (isset($_GET['Category'])) {
                   <!-- ------------------San Pham--------------- -->
                   <!-- ------------------Phan trang--------------- -->
                   <div class="product__pagination">
-                     <?php
-                     $total = $total->num_rows;
-                     $total_pages = ceil($total / $limit);
-                     if ($current_page > 3) {
+                     <?php if ($current_page > 1) {
+                        $prevpage = $current_page - 1;
                      ?>
-                        <a href="?<?= $param ?>&limit=<?= $limit ?>&page=1">&laquo;</a>
-                     <?php
-                     }
-                     ?>
-                     <?php for ($num = 1; $num <= $total_pages; $num++) { ?>
-                        <?php if ($num != $current_page) { ?>
-                           <?php if ($num > $current_page - 3 && $num < $current_page + 3) { ?>
-                              <a href="?<?= $param ?>&limit=<?= $limit ?>&page=<?= $num ?>"><?= $num ?></a>
-                           <?php } ?>
+                        <a href="?<?= $param ?>&limit=<?= $limit ?>&page=<?= $prevpage ?>"><i class="fa fa-long-arrow-left"></i></a>
+                     <?php } ?>
+                     <?php $total = $total->num_rows;
+                     // var_dump($total);
+                     $totalpage = ceil($total / $limit);
+                     for ($num = 1; $num <= $totalpage; $num++) { ?>
+                        <?php if ($current_page != $num) { ?>
+                           <a href="?<?= $param ?>&limit=<?= $limit ?>&page=<?= $num ?>"><?= $num ?></a>
                         <?php } else { ?>
-                           <a style="background-color: #cc9966;color:white" href="?<?= $param ?>&limit=<?= $limit ?>&page=<?= $num ?>"><?= $num ?></a>
+                           <a style="background-color: #cc9966;color:white"><?= $num ?></a>
                         <?php } ?>
                      <?php } ?>
-                     <?php
-                     if ($current_page <= $total_pages - 3) {
+                     <?php if ($current_page <= $totalpage - 1) {
+                        $nextpage = $current_page + 1;
                      ?>
-                        <a href="?<?= $param ?>&limit=<?= $limit ?>&page=<?= $total_pages ?>">&raquo;</a>
-                     <?php
-                     }
-                     ?>
+                        <a href="?<?= $param ?>&limit=<?= $limit ?>&page=<?= $nextpage ?>"><i class="fa fa-long-arrow-right"></i></a>
+                     <?php } ?>
                   </div>
-
                   <!-- ------------------Phan trang--------------- -->
                </div>
             </div>

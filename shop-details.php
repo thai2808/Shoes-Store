@@ -30,7 +30,21 @@ require("connect.php");
 
 <body>
    <?php
-
+   if (isset($_SESSION["cusid"]) && isset($_GET["proid"]) &&isset($_GET["comment"]) && isset($_GET["rating"])) {
+      $cusid = $_SESSION["cusid"];
+      $proid = $_GET["proid"];
+      $comment = $_GET["comment"];
+      $star = $_GET["rating"];
+      $query_str =
+         "Insert into comments(CusID, ProID, ComContent, Star) 
+values ('{$cusid}', '{$proid}', '{$comment}', '{$star}')";
+      $is_ok = $con->query($query_str);
+      if ($is_ok) {
+         header("Location: shop-details.php?ProID={$proid}");
+      } else {
+         echo "Error";
+      }
+   }
    include('include/header.php');
    ?>
    <!-- Page Preloder -->
@@ -379,29 +393,35 @@ require("connect.php");
                                  <?php
                                  } ?>
                               </div>
-                              <form action="add-review.php" method="get">
-                                 <div class="rating-container">
-                                    <h5>Tap to Rate:</h5>
-                                    <div class="rating">
-                                       <input type="radio" id="star5" name="rating" value="5">
-                                       <label for="star5"></label>
-                                       <input type="radio" id="star4" name="rating" value="4">
-                                       <label for="star4"></label>
-                                       <input type="radio" id="star3" name="rating" value="3">
-                                       <label for="star3"></label>
-                                       <input type="radio" id="star2" name="rating" value="2">
-                                       <label for="star2"></label>
-                                       <input type="radio" id="star1" name="rating" value="1">
-                                       <label for="star1"></label>
+                              <?php
+                              if (isset($_SESSION['cusid'])) {
+                              ?>
+                                 <form action="shop-details.php" method="get">
+                                    <div class="rating-container">
+                                       <h5>Tap to Rate:</h5>
+                                       <div class="rating">
+                                          <input type="radio" id="star5" name="rating" value="5">
+                                          <label for="star5"></label>
+                                          <input type="radio" id="star4" name="rating" value="4">
+                                          <label for="star4"></label>
+                                          <input type="radio" id="star3" name="rating" value="3">
+                                          <label for="star3"></label>
+                                          <input type="radio" id="star2" name="rating" value="2">
+                                          <label for="star2"></label>
+                                          <input type="radio" id="star1" name="rating" value="1">
+                                          <label for="star1"></label>
+                                       </div>
                                     </div>
-                                 </div>
-                                 <div class="comment-box">
-                                    <input type="hidden" name="proid" value="<?= $_GET["ProID"] ?>" />
-                                    <textarea id="comment-input" placeholder="Enter your comment!" name="comment"></textarea>
-                                    <button id="submit-button" align=right>Send</button>
-                                 </div>
-
-                              </form>
+                                    <div class="comment-box">
+                                       <input type="hidden" name="proid" value="<?= $_GET["ProID"] ?>" />
+                                       <textarea id="comment-input" placeholder="Enter your comment!" name="comment"></textarea>
+                                       <button id="submit-button">Send</button>
+                                    </div>
+                                 </form>
+                              <?php } else {
+                                 echo '<br>';
+                                 echo '<div class="notification" style>Vui lòng đăng nhập để có thể review sản phẩm!!!</div>';
+                              } ?>
                            </div>
                         </div>
                      </div>

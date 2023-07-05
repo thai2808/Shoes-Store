@@ -68,7 +68,7 @@ $rs = $con->query($sql);
                                  <?php while ($row = $rs->fetch_assoc()) { ?>
                                     <tr>
                                        <td><?= $row["BlogID"] ?></td>
-                                       <td><img src="../img/all/<?=$row["BlogImage"]?>" alt="" width="200"></td>
+                                       <td><img src="../img/blog/<?=$row["BlogImage"]?>" alt="" width="200"></td>
                                        <td><?= $row["BlogTittle"] ?></td>
                                        <td><?= $row["BlogDescription"] ?></td>
                                        <td><?= $row["BlogContent"] ?></td>

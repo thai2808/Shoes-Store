@@ -86,7 +86,7 @@ include('include/header.php');
                         ?>
                            <a href="blog-details.php?BlogID=<?= $row_recent['BlogID'] ?>" class="blog__sidebar__recent__item">
                               <div class="blog__sidebar__recent__item__pic">
-                                 <img src="img/all/<?= $row_recent['BlogImage'] ?>" alt="">
+                                 <img src="img/blog/<?= $row_recent['BlogImage'] ?>" alt="">
                               </div>
                               <div class="blog__sidebar__recent__item__text">
 
@@ -110,7 +110,7 @@ include('include/header.php');
             <div class="col-lg-8 col-md-7 order-md-1 order-1">
                <h2 style="text-align: center;font-weight: 500;padding-bottom: 40px"><?= $row['BlogTittle'] ?></h2>
                <div class="blog__details__text">
-                  <img src="img/all/<?= $row['BlogImage'] ?>" alt="">
+                  <img src="img/blog/<?= $row['BlogImage'] ?>" alt="">
                   <span style="font-weight:bold; font-family:Times New Roman,Times,serif;">
                      <i><?= $row['BlogDescription'] ?></i>
                   </span>
@@ -122,7 +122,7 @@ include('include/header.php');
                      <div class="col-lg-6">
                         <div class="blog__details__author">
                            <div class="blog__details__author__pic">
-                              <img src="img/all/avatar.jpg" alt="">
+                              <img src="img/blog/avatar.jpg" alt="">
                            </div>
                            <div class="blog__details__author__text">
 

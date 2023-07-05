@@ -84,15 +84,31 @@ $rs = $con->query($sql);
                      <!-- /.card-body -->
                      <div class="card-footer clearfix">
                            <ul class="pagination pagination-sm m-0 float-right">
-                              <?php if ($current_page > 1) : ?>
-                                 <li class="page-item"><a class="page-link" href="?manage=brand&page=1">&laquo;</a></li>
-                              <?php endif; ?>
-                              <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
-                                 <li class="page-item <?= ($i == $current_page) ? 'active' : '' ?>"><a class="page-link" href="?manage=brand&page=<?= $i ?>"><?= $i ?></a></li>
-                              <?php endfor; ?>
-                              <?php if ($current_page < $total_pages) : ?>
-                                 <li class="page-item"><a class="page-link" href="?manage=brand&page=<?=$total_pages?>">&raquo;</a></li>
-                              <?php endif; ?>
+                           <?php
+                           if ($current_page > 3) {
+                              $first_page = 1;
+                           ?>
+                              <li class="page-item"><a class="page-link" href="?manage=brand&page=1">&laquo;</a></li>
+                           <?php
+                           }
+                           ?>
+                           <?php for ($num = 1; $num <= $total_pages; $num++) { ?>
+                              <?php if ($num != $current_page) { ?>
+                                 <?php if ($num > $current_page - 3 && $num < $current_page + 3) { ?>
+                                    <li class="page-item"><a class="page-link" href="?manage=brand&page=<?= $num ?>"><?= $num ?></a>
+                                    <?php } ?>
+                                 <?php } else {
+                                 ?>
+                                    <li class="page-item active"><a class="page-link" href="?manage=brand&page=<?= $num ?>"><?= $num ?></a>
+                                    <?php } ?>
+                                 <?php } ?>
+                                 <?php
+                                 if ($current_page <= $total_pages - 3) {
+                                 ?>
+                                    <li class="page-item"><a class="page-link" href="?manage=brand&page=<?= $total_pages ?>">&raquo;</a>
+                                    <?php
+                                 }
+                                    ?>
                            </ul>
                         </div>
                   </div>

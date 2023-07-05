@@ -13,15 +13,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    if ($result->num_rows==1) {
 
 		$row = $result->fetch_assoc();
-		$_SESSION["fullname"] = $row["Username"];
+		$_SESSION["adname"] = $row["Username"];
       // $_SESSION["uid"] = $row["uid"];
 		$_SESSION["login_error"] = "";
-		$_SESSION["login"]=TRUE;
-		header("Location: index.php");
+		$_SESSION["login_ad"]=TRUE;
+		header("Location: admin.php");
 	} else {
 		$_SESSION["login_error"]="Username or Password incorrect! Please try again!";
-		$_SESSION["login"] = FALSE;
-		header("Location: admin.php");
+		$_SESSION["login_ad"] = FALSE;
+		header("Location: login.php");
 	}
 }
 ?>
@@ -45,6 +45,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body class="hold-transition login-page">
+   <?php if(isset($_SESSION["login_error"])){ ?>
+   <center style="color: red;"><?=$_SESSION["login_error"]?></center>
+   <?php } ?>
    <div class="login-box">
       <!-- /.login-logo -->
       <div class="card card-outline card-primary">
@@ -56,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <form action="" method="post">
                <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Tên đăng nhập" name="txtuser">
+                  <input type="text" class="form-control" placeholder="Tên đăng nhập" name="txtuser" required>
                   <div class="input-group-append">
                      <div class="input-group-text">
                         <span class="fas fa-envelope"></span>
@@ -64,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   </div>
                </div>
                <div class="input-group mb-3">
-                  <input type="password" class="form-control" placeholder="Mật Khẩu" name="txtpass">
+                  <input type="password" class="form-control" placeholder="Mật Khẩu" name="txtpass" required>
                   <div class="input-group-append">
                      <div class="input-group-text">
                         <span class="fas fa-lock"></span>
@@ -73,12 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                </div>
                <div class="row">
                   <div class="col-8">
-                     <div class="icheck-primary">
-                        <input type="checkbox" id="remember">
-                        <label for="remember">
-                           Remember Me
-                        </label>
-                     </div>
+                     
                   </div>
                   <!-- /.col -->
                   <div class="col-4">
@@ -91,9 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <!-- /.social-auth-links -->
 
-            <p class="mb-1">
-               <a href="forgot-password.html">I forgot my password?</a>
-            </p>
+
 
          </div>
          <!-- /.card-body -->

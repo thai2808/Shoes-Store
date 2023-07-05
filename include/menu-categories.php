@@ -8,7 +8,7 @@ $sql_category = mysqli_query($con, 'SELECT * FROM brand');
             <div class="hero__categories">
                <div class="hero__categories__all">
                   <i class="fa fa-bars"></i>
-                  <span>Danh Mục</span>
+                  <span>Thương Hiệu</span>
                </div>
                <ul>
                   <?php

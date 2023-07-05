@@ -22,7 +22,7 @@
    
 
             <!-- Sidebar Menu -->
-            <nav class="mt-2">
+            <nav class="user-panel mt-2">
                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                   data-accordion="false">
                   <!-- Add icons to the links using the .nav-icon class
@@ -32,6 +32,15 @@
                         <i class="nav-icon fas fa-tachometer-alt "></i>
                         <p>
                            Dashboard
+                        </p>
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a href="admin.php?manage=account" class="nav-link">
+                        <!-- <i class="nav-icon fas fa-copy"></i> -->
+                        <i class="nav-icon fas fa-user-cog"></i></i>
+                        <p>
+                           Quản Lý Tài Khoản
                         </p>
                      </a>
                   </li>
@@ -94,8 +103,8 @@
                         </p>
                      </a>
                   </li>
-                  <li class="nav-item">
-                     <a href="admin.php?manage=image" class="nav-link <?php if (isset($_GET['manage']) && $_GET['manage'] =="image"){echo "active";} ?>">
+                  <li class="nav-item user-panel">
+                     <a href="admin.php?manage=picture" class="nav-link <?php if (isset($_GET['manage']) && $_GET['manage'] =="image"){echo "active";} ?>">
                         <!-- <i class="nav-icon fas fa-copy"></i> -->
                         <i class="nav-icon fas fa-images"></i>
                         <p>
@@ -103,9 +112,21 @@
                         </p>
                      </a>
                   </li>
+                  <li class="nav-item user-panel">
+                     <a href="logout.php" class="nav-link">
+                        <!-- <i class="nav-icon fas fa-copy"></i> -->
+                        <i class="nav-icon fas fa-sign-out-alt"></i>
+                        <p>
+                           Đăng Xuất
+                        </p>
+                     </a>
+                  </li>
                </ul>
             </nav>
+           
+
             <!-- /.sidebar-menu -->
          </div>
          <!-- /.sidebar -->
       </aside>
+      

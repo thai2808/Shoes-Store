@@ -39,7 +39,7 @@ $row = $result->fetch_assoc();
 </head>
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed"> 
+<body class="hold-transition sidebar-mini layout-fixed">
 
 
    <div class="wrapper">
@@ -118,17 +118,27 @@ $row = $result->fetch_assoc();
                include_once('./blog/blog_add.php');
                break;
             case 'blog_edit':
-               include_once('./blog/blog_add.php');
+               include_once('./blog/blog_edit.php');
                break;
 
-            case 'image':
+            case 'picture':
                include_once('./picture/picture.php');
                break;
             case 'picture_add':
                include_once('./picture/picture_add.php');
                break;
-            case 'paymentmethod_edit':
-               include_once('./picture/picture_add.php');
+            case 'picture_edit':
+               include_once('./picture/picture_edit.php');
+               break;
+
+            case 'account':
+               include_once('./account/account.php');
+               break;
+            case 'account_add':
+               include_once('./account/account_add.php');
+               break;
+            case 'account_edit':
+               include_once('./account/account_edit.php');
                break;
          }
       } else { ?>
@@ -237,7 +247,7 @@ $row = $result->fetch_assoc();
                               if ($rs_blog->num_rows > 0) {
                                  $row_blog = $rs_blog->fetch_assoc();
                               } ?>
-                              <h3><?=$row_blog['SoBlog']?></h3>
+                              <h3><?= $row_blog['SoBlog'] ?></h3>
                               <p>Blog</p>
                            </div>
                            <div class="icon">
