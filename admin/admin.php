@@ -140,6 +140,15 @@ $row = $result->fetch_assoc();
             case 'account_edit':
                include_once('./account/account_edit.php');
                break;
+            case 'size':
+               include_once('./size/size.php');
+               break;
+            case 'size_add':
+               include_once('./size/size_add.php');
+               break;
+            case 'size_edit':
+               include_once('./size/size_edit.php');
+               break;
          }
       } else { ?>
          <!-- Content Wrapper. Contains page content -->

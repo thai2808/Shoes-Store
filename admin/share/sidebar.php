@@ -103,12 +103,21 @@
                         </p>
                      </a>
                   </li>
-                  <li class="nav-item user-panel">
+                  <li class="nav-item ">
                      <a href="admin.php?manage=picture" class="nav-link <?php if (isset($_GET['manage']) && $_GET['manage'] =="image"){echo "active";} ?>">
                         <!-- <i class="nav-icon fas fa-copy"></i> -->
                         <i class="nav-icon fas fa-images"></i>
                         <p>
                            Quản Lý Ảnh Sản Phẩm
+                        </p>
+                     </a>
+                  </li>
+                  <li class="nav-item user-panel">
+                     <a href="admin.php?manage=size" class="nav-link">
+                        <!-- <i class="nav-icon fas fa-copy"></i> -->
+                        <i class="nav-icon far fa-window-maximize"></i>
+                        <p>
+                           Quản Lý Kích Cỡ
                         </p>
                      </a>
                   </li>
